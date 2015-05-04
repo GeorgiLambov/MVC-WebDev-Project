@@ -33,9 +33,6 @@ if (method_exists($controller, $action)) {
     die("Cannot find action '$action' in controller '$controllerClassName'");
 }
 
-
-
-
 function __autoload($class_name) {
     if (file_exists("controllers/$class_name.php")) {
         include "controllers/$class_name.php";

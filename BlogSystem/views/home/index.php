@@ -1,3 +1,3 @@
 <div class="jumbotron">
-   <p>Welcome to this MVC sample application.</p>
+   <p>Welcome to this MVC Blog application.</p>
 </div>
