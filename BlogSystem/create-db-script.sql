@@ -18,8 +18,11 @@ DROP TABLE IF EXISTS `blog_system`.`users`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `blog_system`.`users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `first_name` varchar(45) NULL,
+  `last_name` varchar(45) NULL,
   `username` varchar(45) NOT NULL,
-  `pass_hash` varchar(45) NOT NULL,
+  `pass_hash` varchar(45)  NULL,
+  `email` varchar(45)  NULL,
   `is_admin` bit(1) NOT NULL DEFAULT b'0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `username_UNIQUE` (`username`)
@@ -58,6 +61,21 @@ CREATE TABLE `blog_system`.`posts` (
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
+DROP TABLE IF EXISTS `blog_system`.`comments`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `blog_system`.`comments` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `text` varchar(200) NOT NULL,
+  `post_id` int(11) NOT NULL,
+  `author` varchar(100) NOT NULL,
+  `date` datetime DEFAULT NULL,
+  `email` varchar(100)  DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_comments_posts_idx` (`post_id`),
+  CONSTRAINT `fk_comments_posts` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 DROP TABLE IF EXISTS `blog_system`.`posts_tags`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -81,3 +99,33 @@ CREATE TABLE `blog_system`.`posts_tags` (
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users`*/;
+INSERT INTO `users` VALUES (1,'fname', 'lname','user', NULL, NULL, 1);
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+UNLOCK TABLES;
+
+LOCK TABLES `posts` WRITE;
+/*!40000 ALTER TABLE `posts` DISABLE KEYS */;
+INSERT INTO `posts` VALUES (1,'Demo title','demo text  PHP for Dummies', 1,NULL,NULL),(2,'Demo title 2','demo2 text  PHP for Dummies', 1,NULL,NULL),
+ (3,'3Demo title','demo text  PHP for Dummies', 1,NULL,NULL),(4,'4Demo title','demo text  PHP for Dummies', 1,NULL,NULL),
+ (5,'Demo title','demo text  PHP for Dummies', 1,NULL,NULL),(6,'Demo title','demo text  PHP for Dummies', 1,NULL,NULL),
+ (7,'Demo title','demo text  PHP for Dummies', 1,NULL,NULL),(8,'Demo title','demo text  PHP for Dummies', 1,NULL,NULL),
+(9,'Demo title','demo text  PHP for Dummies', 1,NULL,NULL),(10,'Demo title','demo text  PHP for Dummies', 1,NULL,NULL);
+/*!40000 ALTER TABLE `posts` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+
+
+
+
+
+
+
+
+
+
+

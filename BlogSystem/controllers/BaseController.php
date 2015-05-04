@@ -1,107 +1,77 @@
 <?php
 
-abstract class BaseController {
-    protected $controller;
-    protected $action;
-    protected $layout = DEFAULT_LAYOUT;
-    protected $viewBag = [];
-    protected $viewRendered = false;
+namespace Controllers;
 
-    public function __construct($controller, $action) {
-        $this->controller = $controller;
-        $this->action = $action;
+abstract class BaseController {
+    protected $controllerName;
+    protected $layoutName = DEFAULT_LAYOUT;
+    protected $isViewRendered = false;
+    protected $isPost = false;
+
+    function __construct($controllerName) {
+        $this->controllerName = $controllerName;
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $this->isPost = true;
+        }
         $this->onInit();
     }
 
-    public function __get($name) {
-        // Properties come from $this->viewBag
-        if (isset($this->viewBag[$name])) {
-            return $this->viewBag[$name];
-        }
-        if (property_exists($this, $name)) {
-            return $this->$name;
-        }
-        return null;
-    }
-
-    public function __set($name, $value) {
-        // Non-existing properties are stored in $this->viewBag
-        $this->viewBag[$name] = $value;
-    }
-
-    protected function onInit() {
-        // Override this function to initialize the controller
+    public function onInit() {
+        // Implement initializing logic in the subclasses
     }
 
     public function index() {
-        $this->renderView();
+        // Implement the default action in the subclasses
     }
 
-    public function renderView($viewName = null, $isPartial = false) {
-        if (!$this->viewRendered) {
-            if ($viewName == null) {
-                $viewName = $this->action;
+    public function renderView($viewName = "Index", $includeLayout = true) {
+        if (!$this->isViewRendered) {
+                   $viewFileName = 'views/' . $this->controllerName
+                . '/' . $viewName . '.php';
+            if ($includeLayout) {
+                $headerFile = 'views/layouts/' . $this->layoutName . '/header.php';
+                include_once($headerFile);
             }
-            if (!$isPartial) {
-                include_once('views/layouts/' . $this->layout . '/header.php');
+            include_once($viewFileName);
+            if ($includeLayout) {
+                $footerFile = 'views/layouts/' . $this->layoutName . '/footer.php';
+                include_once($footerFile);
             }
-            include_once('views/' . $this->controller . '/' . $viewName . '.php');
-            if (!$isPartial) {
-                include_once('views/layouts/' . $this->layout . '/footer.php');
-            }
-            $this->viewRendered = true;
+            $this->isViewRendered = true;
         }
     }
 
-    protected function redirect($controller = null, $action = null, $params = []) {
-        if ($controller == null) {
-            $controller = $this->controller;
-        }
-        $url = "/$controller/$action";
-        $paramsUrlEncoded = array_map('urlencode', $params);
-        $paramsJoined = implode('/', $paramsUrlEncoded);
-        if ($paramsJoined != '') {
-            $url = $url . '/' . $paramsJoined;
-        }
-        header("Location: $url");
+    public function redirectToUrl($url) {
+        header("Location: " . $url);
         die;
     }
 
-    protected function isPost() {
-        return $_SERVER['REQUEST_METHOD'] == 'POST';
-    }
-
-    protected function addErrorMessage($errorMsg) {
-        if (!isset($_SESSION['errorMessages'])) {
-            $_SESSION['errorMessages'] = [];
+    public function redirect(
+            $controllerName, $actionName = null, $params = null) {
+        $url = '/' . urlencode($controllerName);
+        if ($actionName != null) {
+            $url .= '/' . urlencode($actionName);
         }
-        array_push($_SESSION['errorMessages'], $errorMsg);
-    }
-
-    protected function addInfoMessage($infoMsg) {
-        if (!isset($_SESSION['infoMessages'])) {
-            $_SESSION['infoMessages'] = [];
+        if ($params != null) {
+            $encodedParams = array_map($params, 'urlencode');
+            $url .= implode('/', $encodedParams);
         }
-        array_push($_SESSION['infoMessages'], $infoMsg);
+        $this->redirectToUrl($url);
     }
 
-    protected function isLoggedIn() {
-        return isset($_SESSION['username']);
+    function addMessage($msg, $type) {
+        if (!isset($_SESSION['messages'])) {
+            $_SESSION['messages'] = array();
+        };
+        array_push($_SESSION['messages'],
+            array('text' => $msg, 'type' => $type));
     }
 
-    protected function isAdmin() {
-        return isset($_SESSION['isAdmin']);
+    function addInfoMessage($msg) {
+        $this->addMessage($msg, 'info');
     }
 
-    protected function authorize() {
-        if (! $this->isLoggedIn()) {
-            $this->redirect("users", "login");
-        }
-    }
-
-    protected function authorizeAdmin() {
-        if (! $this->isAdmin()) {
-            die('Administrator account is required!');
-        }
+    function addErrorMessage($msg) {
+        $this->addMessage($msg, 'error');
     }
 }

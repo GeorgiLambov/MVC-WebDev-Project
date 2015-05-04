@@ -28,14 +28,12 @@ if (class_exists($controllerClassName)) {
 }
 
 if (method_exists($controller, $action)) {
-    //$controller->{$action}($params);
     call_user_func_array(array($controller, $action), $params);
-    $controller->renderView();
 } else {
     die("Cannot find action '$action' in controller '$controllerClassName'");
 }
 
-$controller->renderView();
+
 
 
 function __autoload($class_name) {
