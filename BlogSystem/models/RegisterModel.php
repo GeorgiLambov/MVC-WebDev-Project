@@ -1,6 +1,5 @@
 <?php
 
-namespace Models;
 
 class RegisterModel extends BaseModel {
 

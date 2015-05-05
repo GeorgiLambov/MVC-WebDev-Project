@@ -1,14 +1,12 @@
 <?php
 
-namespace Controllers;
+
 
 use Models\BaseModel;
 
 class LoginController extends BaseController {
 
     function index() {
-        $this->renderView();
-
         if (isset($_POST['submitted'])) {
             $data = $this->getData();
             if ($data != NULL) {
@@ -23,7 +21,7 @@ class LoginController extends BaseController {
             }
         }
 
-
+        $this->renderView();
     } 
     
     private function getData() {

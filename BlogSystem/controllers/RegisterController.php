@@ -1,5 +1,5 @@
 <?php
-namespace Controllers;
+
 
 class RegisterController extends BaseController{
     public function __construct() {
@@ -18,6 +18,8 @@ class RegisterController extends BaseController{
                 $this->addErrorMessage('You ar not registered! Please try again later!');
             } 
         }
+
+        $this->renderView();
     }
 
     private function getFormData() {

@@ -1,3 +1,3 @@
-<div class="jumbotron">
-   <p>Welcome to this MVC Blog application.</p>
+<div class="row">
+    <p1>Home controler view</p1>
 </div>

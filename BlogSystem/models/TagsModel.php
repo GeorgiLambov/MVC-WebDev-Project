@@ -23,7 +23,7 @@ class TagsModel extends BaseModel{
 
     public function getMostPopularTags() {
           $statement = self::$db->prepare("
-                    SELECT t.id,t.text,COUNT(t.text) AS popularity
+                    SELECT t.id, t.text, COUNT(t.text) AS popularity
                     FROM blog_system.posts_tags pt
                     LEFT JOIN tags t
                     ON pt.tag_id = t.id

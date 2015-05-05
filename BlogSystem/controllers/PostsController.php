@@ -27,7 +27,11 @@ class PostsController extends BaseController {
         }
 
         $mostPopularTags = $this->tagsModel->getMostPopularTags();
-        $this->renderView();
+        if (!empty($mostPopularTags)){
+            $this->mostPopularTags = $mostPopularTags;
+        }
+
+        $this->renderView(__FUNCTION__);
     }
 
     public function create() {
@@ -70,7 +74,7 @@ class PostsController extends BaseController {
 
     public function byPeriod($days) {
         if (!is_numeric($days)) {
-            $this->addErrorMessage('Invalid URL', 'error');
+            $this->addErrorMessage('Invalid URL');
             $this->redirectTo('/posts/index');
         }
 
@@ -134,13 +138,13 @@ class PostsController extends BaseController {
 
     public function view($id) {
         if (!is_numeric($id)) {
-            $this->addMessage('Invalid URL', 'error');
+            $this->addErrorMessage('Invalid URL');
             $this->redirectTo('/posts/index');
         }
 
         $this->model->updateCounter($id);
 
-        $template = ROOT_DIR . $this->viewsDir . 'view.php';
+       // $template = ROOT_DIR . $this->viewsDir . 'view.php';
 
         if (isset($_POST['submitted']) && $_POST['submitted'] == 1) {
             $commentData = $this->getAddCommentFormData();

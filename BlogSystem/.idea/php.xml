@@ -7,6 +7,14 @@
         <option value="BaseModel-&gt;find" />
         <option value="TagsModel-&gt;getTagsFromPostId" />
         <option value="PostsController-&gt;index" />
+        <option value="BaseController-&gt;renderView" />
+        <option value="HomeController-&gt;index" />
+        <option value="RegisterController-&gt;index" />
+        <option value="LoginController-&gt;index" />
+        <option value="Valitron\Validator-&gt;rules" />
+        <option value="BaseController-&gt;makeValidation" />
+        <option value="BaseController-&gt;addErrorMessage" />
+        <option value="include_once" />
       </list>
     </option>
   </component>
