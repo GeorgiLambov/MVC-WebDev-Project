@@ -1,7 +1,5 @@
 <?php
 
-namespace Models;
-
 abstract class BaseModel {
     protected static $db;
     protected $table;

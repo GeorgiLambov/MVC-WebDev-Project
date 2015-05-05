@@ -1,7 +1,5 @@
 <?php
 
-namespace Models;
-
 class PostsModel extends BaseModel{
 
     public function __construct($args = array()) {

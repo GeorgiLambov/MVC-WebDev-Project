@@ -1,8 +1,12 @@
 <?php
-
 session_start();
 
 require_once('includes/config.php');
+require_once('content/validator/src/Valitron/Validator.php');
+
+use Valitron\Validator as V;
+V::langDir(__DIR__.'/content/validator/lang');
+V::lang('en');
 
 $requestParts = explode('/', parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
 

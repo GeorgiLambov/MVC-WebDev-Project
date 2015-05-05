@@ -1,6 +1,6 @@
 <?php
 
-namespace Models;
+
 
 class TagsModel extends BaseModel{
 
@@ -17,6 +17,7 @@ class TagsModel extends BaseModel{
                  WHERE pt.post_id = ?
                  LIMIT 5");
         $statement->bind_param("i", $postId);
+
         return $this->executeStatementWithResultArray($statement);
      }
 
@@ -29,7 +30,8 @@ class TagsModel extends BaseModel{
                     GROUP BY t.text
                     ORDER BY popularity DESC
                     LIMIT 10");
-                    return $this->executeStatementWithResultArray($statement);
+
+        return $this->executeStatementWithResultArray($statement);
     }
 }
 

@@ -1,14 +1,13 @@
 <?php
 
-namespace Lib;
-
-class Auth{
+class AuthModel extends BaseModel {
     private static $isLogged = FALSE;
     private static $loggedUser = ARRAY();
-    
-    private function __construct() {
+
+    public function __construct($args = array()) {
+        parent::__construct(array('table' => 'users'));
         session_set_cookie_params(1800, '/');
-        session_start();
+        //session_start();
         
         if (! empty($_SESSION['username'])) {
             self::$isLogged = TRUE;
@@ -17,15 +16,6 @@ class Auth{
                 'username' => $_SESSION['username']
             );
         }
-    }
-    
-    public static function get_instance() {
-        static $instance = NULL;
-        if ($instance === NULL) {
-            $instance = new static();
-        }
-        
-        return $instance;
     }
     
     public function isLogged() {
@@ -37,12 +27,10 @@ class Auth{
     }
     
     public function logIn($username, $password) {
-        $dbObject = \Lib\Database::get_instance();
-        $db = $dbObject->getDb();
-        
+
         //TODO: make hash on login query after make hashing on password on register
         // "AND password = MD5(?) LIMIT 1"
-        $statement = $db->prepare(
+        $statement = self::$db->prepare(
                 "SELECT id, username "
                 . "FROM users "
                 . "WHERE username = ? "

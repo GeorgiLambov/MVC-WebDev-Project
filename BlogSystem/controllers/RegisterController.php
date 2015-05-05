@@ -1,48 +1,38 @@
 <?php
 namespace Controllers;
 
-class Register_Controller extends Master_Controller{
+class RegisterController extends BaseController{
     public function __construct() {
-        parent::__construct(get_class(), 'register', '/views/register/');
+        parent::__construct(get_class());
         $this->fieldsErrors = array();
     }
     
     function index() {
-        $template = ROOT_DIR . $this->viewsDir . 'index.php';
         if (isset($_POST['submitted']) && $_POST['submitted'] = 1) {
             $userData = $this->getFormData();
             $result = $this->model->registerUser($userData);
             if ($result) {
-                $this->addMessage('You are registered now! If you want login now!', 'info');
-                $this->redirectTo('/login/index');
+                $this->addInfoMessage('Successful Registration!. Please Login!');
+                $this->redirectToUrl('/login/index');
             } else {
-                $this->addMessage('You ar not registered! Please try again later!', 'error');
+                $this->addErrorMessage('You ar not registered! Please try again later!');
             } 
         }
-        
-        include_once $this->layout;
     }
 
     private function getFormData() {
         $rules = [
             'required' => [
                 ['username'], 
-                ['firstName'], 
-                ['lastName'], 
-                ['email'], 
-                ['password'], 
+                ['password'],
                 ['confirmPassword']
             ],
             'lengthMin' => [
-                ['username', 5],
-                ['firstName', 3],
-                ['lastName', 3],
+                ['username', 3],
                 ['password', 5]
             ],
             'lengthMax' => [
                 ['username', 20],
-                ['firstName', 20],
-                ['lastName', 20],
                 ['password', 10]
             ],
             'alpha' => [
@@ -62,5 +52,17 @@ class Register_Controller extends Master_Controller{
         ];
         
         return $this->makeValidation($rules);
+    }
+
+    public function onInit() {
+    // Names of fields for validation messages
+        $this->validator->labels(array(
+            'username' => 'Username',
+            'firstName' => 'First name',
+            'lastName' => 'Last name',
+            'email' => 'Email address',
+            'Password' => 'Password',
+            'confirmPassword' => 'Confirm password'
+        ));
     }
 }

@@ -1,18 +1,24 @@
 <?php
 
-namespace Controllers;
-
 abstract class BaseController {
     protected $controllerName;
     protected $layoutName = DEFAULT_LAYOUT;
     protected $isViewRendered = false;
     protected $isPost = false;
+    protected $fieldsErrors;
 
     function __construct($controllerName) {
         $this->controllerName = $controllerName;
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $this->isPost = true;
         }
+        $this->fieldsErrors = array();
+        $this->validator = new \Valitron\Validator($_POST);
+
+        $this->auth = new AuthModel();
+        $loggedUser = $this->auth->getLoggedUser();
+        $this->loggedUser = $loggedUser;
+
         $this->onInit();
     }
 
@@ -41,9 +47,15 @@ abstract class BaseController {
         }
     }
 
+    function makeDateInFormat($dateStr)
+    {
+        $date = new \DateTime($dateStr);
+        return $date->format('d M y');
+    }
+
     public function redirectToUrl($url) {
         header("Location: " . $url);
-        die;
+        exit();
     }
 
     public function redirect(
@@ -73,5 +85,21 @@ abstract class BaseController {
 
     function addErrorMessage($msg) {
         $this->addMessage($msg, 'error');
+    }
+
+    public function makeValidation($rules) {
+        $this->validator->rules($rules);
+        if($this->validator->validate()) {
+            return $this->validator->data();
+        } else {
+            $allErrors = $this->validator->errors();
+            $errors = array();
+
+            foreach ($allErrors as $key => $error) {
+                $errors[$key] = implode(', ', $error);
+            }
+
+            $this->fieldsErrors = $errors;
+        }
     }
 }

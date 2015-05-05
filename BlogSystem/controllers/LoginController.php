@@ -2,40 +2,39 @@
 
 namespace Controllers;
 
-class Login_Controller extends Master_Controller {
-    public function __construct() {
-        //className, modelName, viewsDirectory
-        parent::__construct(get_class(), 'login', '/views/login/');
-    }
-    
+use Models\BaseModel;
+
+class LoginController extends BaseController {
+
     function index() {
+        $this->renderView();
+
         if (isset($_POST['submitted'])) {
-            $data = $this->getDataFromForm();
+            $data = $this->getData();
             if ($data != NULL) {
                 $isLogged = $this->auth->logIn($data['username'], $data['password']);
             }
             
             if (isset($isLogged) && $isLogged == TRUE) {
-                $this->addMessage('You are in the system now ;)', 'info');
-                $this->redirectTo('/posts/index');
+                $this->addInfoMessage('Hello, '. $data['username']);
+                $this->redirectToUrl('/posts/index');
             } else {
-                $this->addMessage('Your login data is invalid!', 'error');
+                $this->addErrorMessage('Your login data is invalid!');
             }
         }
-        
-        $template = ROOT_DIR . $this->viewsDir . 'index.php';
-        include_once $this->layout;
+
+
     } 
     
-    private function getDataFromForm() {
+    private function getData() {
         $rules = [
             'required' => [
                 ['username'], 
                 ['password']
             ],
             'lengthMin' => [
-                ['username', 5],
-                ['password', 5]
+                ['username', 2],
+                ['password', 3]
             ],
             'lengthMax' => [
                 ['username', 20],
