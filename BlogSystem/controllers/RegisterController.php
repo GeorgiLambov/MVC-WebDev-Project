@@ -1,16 +1,27 @@
 <?php
 
-
 class RegisterController extends BaseController{
-    public function __construct() {
-        parent::__construct(get_class());
-        $this->fieldsErrors = array();
+
+    private $registerModel;
+
+    public function onInit() {
+        // Names of fields for validation messages
+        $this->validator->labels(array(
+            'username' => 'Username',
+            'firstName' => 'First name',
+            'lastName' => 'Last name',
+            'email' => 'Email address',
+            'Password' => 'Password',
+            'confirmPassword' => 'Confirm password'
+        ));
+
+        $this->registerModel = new RegisterModel();
     }
-    
+
     function index() {
-        if (isset($_POST['submitted']) && $_POST['submitted'] = 1) {
+        if ($this->isPost) {
             $userData = $this->getFormData();
-            $result = $this->model->registerUser($userData);
+          //  $result = $this->registerModel->registerUser($userData);
             if ($result) {
                 $this->addInfoMessage('Successful Registration!. Please Login!');
                 $this->redirectToUrl('/login/index');
@@ -54,17 +65,5 @@ class RegisterController extends BaseController{
         ];
         
         return $this->makeValidation($rules);
-    }
-
-    public function onInit() {
-    // Names of fields for validation messages
-        $this->validator->labels(array(
-            'username' => 'Username',
-            'firstName' => 'First name',
-            'lastName' => 'Last name',
-            'email' => 'Email address',
-            'Password' => 'Password',
-            'confirmPassword' => 'Confirm password'
-        ));
     }
 }

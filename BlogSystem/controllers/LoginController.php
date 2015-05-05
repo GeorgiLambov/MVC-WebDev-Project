@@ -1,13 +1,9 @@
 <?php
 
-
-
-use Models\BaseModel;
-
 class LoginController extends BaseController {
 
     function index() {
-        if (isset($_POST['submitted'])) {
+        if ( $this->isPost ) {
             $data = $this->getData();
             if ($data != NULL) {
                 $isLogged = $this->auth->logIn($data['username'], $data['password']);

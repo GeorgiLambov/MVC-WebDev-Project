@@ -103,7 +103,8 @@ CREATE TABLE `blog_system`.`posts_tags` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users`*/;
-INSERT INTO `users` VALUES (1,'fname', 'lname','user', NULL, NULL, 1);
+INSERT INTO `users` VALUES (1,'fname', 'lname','user', NULL, NULL, 0);
+INSERT INTO `users` VALUES (2, null, null,'admin', NULL, NULL, 1);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 

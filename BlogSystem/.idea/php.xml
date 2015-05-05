@@ -15,6 +15,11 @@
         <option value="BaseController-&gt;makeValidation" />
         <option value="BaseController-&gt;addErrorMessage" />
         <option value="include_once" />
+        <option value="AuthModel-&gt;isLogged" />
+        <option value="LoginController-&gt;getData" />
+        <option value="Valitron\Validator-&gt;validate" />
+        <option value="RegisterModel-&gt;registerUser" />
+        <option value="RegisterController-&gt;getFormData" />
       </list>
     </option>
   </component>

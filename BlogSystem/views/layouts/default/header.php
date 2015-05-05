@@ -11,13 +11,13 @@
 </head>
 <body>
 <div class="container">
-    <div class="jumbotron">
+    <div class="page-header">
         <h3>Welcome to this Custom MVC Blog application</h3>
     </div>
     <nav class="navbar navbar-default">
         <div class="container-fluid">
             <div class="navbar-header">
-               <a class="navbar-brand" href="/">BlogSystem</a>
+                <a class="navbar-brand" href="/">BlogSystem</a>
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
@@ -57,7 +57,7 @@
         <?php unset($_SESSION['message']) ?>
     <?php endif; ?>
     <div class="row">
-        <div class="btn-group-vertical col-xs-2">
+        <div class="btn-group-vertical col-md-2">
             <a href="/posts/index" class="btn btn-default">All Posts</a>
             <?php if($this->auth->isLogged()): ?>
                 <a href="/posts/add">Add post</a>
