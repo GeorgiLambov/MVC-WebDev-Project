@@ -1,7 +1,7 @@
 <form class="form-horizontal col-lg-6 col-sm-6 col-xs-6" role="form" method="POST" name="register">
     <fieldset>
         <legend>Register</legend>
-        <div class="form-group">
+        <div class="form-group col-md-12">
             <?php if(isset($this->fieldsErrors['username'])) :?>
                 <div class="alert alert-dismissible alert-danger">
                     <button type="button" class="close" data-dismiss="alert">×</button>
@@ -14,7 +14,7 @@
                        value="<?php echo isset($_POST['username']) ? $_POST['username'] : '' ?>">
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group col-md-12">
             <?php if(isset($this->fieldsErrors['firstName'])) :?>
                 <div class="alert alert-dismissible alert-danger">
                     <button type="button" class="close" data-dismiss="alert">×</button>
@@ -27,7 +27,7 @@
                        value="<?php echo isset($_POST['firstName']) ? $_POST['firstName'] : '' ?>">
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group col-md-12">
             <?php if(isset($this->fieldsErrors['lastName'])) :?>
                 <div class="alert alert-dismissible alert-danger">
                     <button type="button" class="close" data-dismiss="alert">×</button>
@@ -40,7 +40,7 @@
                        value="<?php echo isset($_POST['lastName']) ? $_POST['lastName'] : '' ?>">
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group col-md-12">
             <?php if(isset($this->fieldsErrors['email'])) :?>
                 <div class="alert alert-dismissible alert-danger">
                     <button type="button" class="close" data-dismiss="alert">×</button>
@@ -53,7 +53,7 @@
                        value="<?php echo isset($_POST['email']) ? $_POST['email'] : '' ?>">
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group col-md-12">
             <?php if(isset($this->fieldsErrors['password'])) :?>
                 <div class="alert alert-dismissible alert-danger">
                     <button type="button" class="close" data-dismiss="alert">×</button>
@@ -65,7 +65,7 @@
                 <input type="password" class="form-control" id="password" name="password" placeholder="Enter password">
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group col-md-12">
             <?php if(isset($this->fieldsErrors['confirmPassword'])) :?>
                 <div class="alert alert-dismissible alert-danger">
                     <button type="button" class="close" data-dismiss="alert">×</button>

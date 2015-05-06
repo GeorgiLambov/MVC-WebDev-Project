@@ -7,14 +7,14 @@ class LoginController extends BaseController {
             $userData = $this->getData();
             if ($userData != NULL) {
                 $isLoggedIn = $this->auth->logIn($userData['username'], $userData['password']);
-            }
 
-            if (isset($isLoggedIn) && $isLoggedIn == TRUE) {
-                $this->addInfoMessage('Successful login!');
-                $this->addInfoMessage('Hello, '. $userData['username']);
-                $this->redirectToUrl('/posts/index');
-            } else {
-                $this->addErrorMessage('Login Error!!!');
+                if (isset($isLoggedIn) && $isLoggedIn == TRUE) {
+                    $this->addInfoMessage('Successful login!');
+                    $this->addInfoMessage('Hello, '. $userData['username']);
+                    $this->redirectToUrl('/posts/index');
+                } else {
+                    $this->addErrorMessage('Login Error! Invalid Username or Password!');
+                }
             }
         }
 
