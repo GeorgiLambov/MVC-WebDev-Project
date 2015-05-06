@@ -74,7 +74,7 @@
             <?php endif;?>
             <label for="confirm-password" class="col-lg-2 control-label">Confirm password:</label>
             <div class="col-lg-10">
-                <input type="password" class="form-control" id="confirm-password" name="confirmPassword" placeholder="Enter password...">
+                <input type="password" class="form-control" id="confirm-password" name="confirmPassword" placeholder="Enter password">
             </div>
         </div>
         <div class="col-lg-10 col-lg-offset-2">

@@ -20,6 +20,9 @@
         <option value="Valitron\Validator-&gt;validate" />
         <option value="RegisterModel-&gt;registerUser" />
         <option value="RegisterController-&gt;getFormData" />
+        <option value="BaseModel-&gt;executeStatementWithResultArray" />
+        <option value="LoginModel-&gt;logIn" />
+        <option value="BaseController-&gt;addInfoMessage" />
       </list>
     </option>
   </component>

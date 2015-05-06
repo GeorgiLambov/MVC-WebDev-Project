@@ -18,7 +18,7 @@ abstract class BaseModel {
         $defaults = array( 'limit' => 0 );
         $args = array_merge($defaults, $args);
         if (!isset($args['table'])) {
-           die('Table not definde.');
+           die('Table not define.');
         }
         extract($args);
         $this->table = $table;

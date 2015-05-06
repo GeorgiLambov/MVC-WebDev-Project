@@ -21,7 +21,7 @@ CREATE TABLE `blog_system`.`users` (
   `first_name` varchar(45) NULL,
   `last_name` varchar(45) NULL,
   `username` varchar(45) NOT NULL,
-  `pass_hash` varchar(45)  NULL,
+  `pass_hash` varchar(100)  NULL,
   `email` varchar(45)  NULL,
   `is_admin` bit(1) NOT NULL DEFAULT b'0',
   PRIMARY KEY (`id`),
@@ -100,13 +100,12 @@ CREATE TABLE `blog_system`.`posts_tags` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
-
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users`*/;
 INSERT INTO `users` VALUES (1,'fname', 'lname','user', NULL, NULL, 0);
-INSERT INTO `users` VALUES (2, null, null,'admin', NULL, NULL, 1);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
+
 
 LOCK TABLES `posts` WRITE;
 /*!40000 ALTER TABLE `posts` DISABLE KEYS */;

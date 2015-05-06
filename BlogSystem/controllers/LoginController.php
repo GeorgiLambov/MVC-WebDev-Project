@@ -3,27 +3,29 @@
 class LoginController extends BaseController {
 
     function index() {
-        if ( $this->isPost ) {
-            $data = $this->getData();
-            if ($data != NULL) {
-                $isLogged = $this->auth->logIn($data['username'], $data['password']);
+        if ($this->isPost) {
+            $userData = $this->getData();
+            if ($userData != NULL) {
+                $isLoggedIn = $this->auth->logIn($userData['username'], $userData['password']);
             }
-            
-            if (isset($isLogged) && $isLogged == TRUE) {
-                $this->addInfoMessage('Hello, '. $data['username']);
+
+            if (isset($isLoggedIn) && $isLoggedIn == TRUE) {
+                $this->addInfoMessage('Successful login!');
+                $this->addInfoMessage('Hello, '. $userData['username']);
                 $this->redirectToUrl('/posts/index');
             } else {
-                $this->addErrorMessage('Your login data is invalid!');
+                $this->addErrorMessage('Login Error!!!');
+                $this->redirectToUrl('/login/index');
             }
         }
 
         $this->renderView();
-    } 
-    
+    }
+
     private function getData() {
         $rules = [
             'required' => [
-                ['username'], 
+                ['username'],
                 ['password']
             ],
             'lengthMin' => [
@@ -39,7 +41,7 @@ class LoginController extends BaseController {
                 ['password']
             ]
         ];
-        
+
         return $this->makeValidation($rules);
     }
 }

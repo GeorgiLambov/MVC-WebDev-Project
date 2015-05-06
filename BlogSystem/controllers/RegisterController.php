@@ -20,29 +20,32 @@ class RegisterController extends BaseController{
 
     function index() {
         if ($this->isPost) {
-            $userData = $this->getFormData();
-          //  $result = $this->registerModel->registerUser($userData);
-            if ($result) {
-                $this->addInfoMessage('Successful Registration!. Please Login!');
-                $this->redirectToUrl('/login/index');
-            } else {
-                $this->addErrorMessage('You ar not registered! Please try again later!');
-            } 
+            $userData = $this->getData();
+            if ($userData != NULL) {
+                $result = $this->registerModel->registerUser($userData);
+
+                if ($result) {
+                    $this->addInfoMessage('Successful Registration!. Please Login!');
+                    $this->redirectToUrl('/login/index');
+                } else {
+                    $this->addErrorMessage('Error in Registration! Please try again later!');
+                }
+            }
         }
 
         $this->renderView();
     }
 
-    private function getFormData() {
+    private function getData() {
         $rules = [
             'required' => [
-                ['username'], 
+                ['username'],
                 ['password'],
                 ['confirmPassword']
             ],
             'lengthMin' => [
-                ['username', 3],
-                ['password', 5]
+                ['username', 2],
+                ['password', 3]
             ],
             'lengthMax' => [
                 ['username', 20],
@@ -63,7 +66,7 @@ class RegisterController extends BaseController{
                 ['password', 'confirmPassword']
             ]
         ];
-        
+
         return $this->makeValidation($rules);
     }
 }

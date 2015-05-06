@@ -15,7 +15,7 @@ abstract class BaseController {
         $this->fieldsErrors = array();
         $this->validator = new \Valitron\Validator($_POST);
 
-        $this->auth = new AuthModel();
+        $this->auth = new LoginModel();
         $loggedUser = $this->auth->getLoggedUser();
         $this->loggedUser = $loggedUser;
 
