@@ -15,7 +15,6 @@ class LoginController extends BaseController {
                 $this->redirectToUrl('/posts/index');
             } else {
                 $this->addErrorMessage('Login Error!!!');
-                $this->redirectToUrl('/login/index');
             }
         }
 

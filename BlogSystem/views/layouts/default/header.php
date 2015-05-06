@@ -35,26 +35,26 @@
                         <li><a href="/login/index">LogIn</a></li>
                     <?php endif; ?>
                     <?php if($this->auth->isLogged()): ?>
-                        <li><a href="/logout/index">LogOut</a></li>
+                        <li><a href="/logout/index">Logout</a></li>
                     <?php endif; ?>
                 </ul>
             </div>
         </div>
     </nav>
-    <?php if(isset($_SESSION['message'])): ?>
-        <?php if($_SESSION['message']['type'] == 'error'): ?>
+    <?php if(isset($_SESSION['messages'])): ?>
+        <?php if($_SESSION['messages']['type'] == 'error'): ?>
             <div class="alert alert-dismissible alert-danger">
                 <button type="button" class="close" data-dismiss="alert">×</button>
-                <strong><?php echo $_SESSION['message']['text']; ?></strong>
+                <strong><?php echo $_SESSION['messages']['text']; ?></strong>
             </div>
         <?php endif; ?>
-        <?php if($_SESSION['message']['type'] == 'info'): ?>
+        <?php if($_SESSION['messages']['type'] == 'info'): ?>
             <div class="alert alert-dismissible alert-success">
                 <button type="button" class="close" data-dismiss="alert">×</button>
-                <strong><?php echo $_SESSION['message']['text']; ?></strong>
+                <strong><?php echo $_SESSION['messages']['text']; ?></strong>
             </div>
         <?php endif; ?>
-        <?php unset($_SESSION['message']) ?>
+        <?php unset($_SESSION['messages']) ?>
     <?php endif; ?>
     <div class="row">
         <div class="btn-group-vertical col-md-2">

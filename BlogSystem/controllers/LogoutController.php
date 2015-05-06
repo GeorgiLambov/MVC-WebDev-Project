@@ -4,10 +4,8 @@ class LogoutController extends BaseController {
 
     public function index() {
         session_destroy();
-        $this->message['type'] = 'info';
-        $this->message['text'] = 'You are out of the system now ;)';
-
-        header("Location: " . '/'); 
+        $this->addInfoMessage('Successful Logout!');
+        $this->redirectToUrl('/home/index');
         exit();
     }
 }

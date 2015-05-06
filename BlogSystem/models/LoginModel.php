@@ -8,7 +8,7 @@ class LoginModel extends BaseModel {
     public function __construct($args = array()) {
         parent::__construct(array('table' => 'users'));
         session_set_cookie_params(1800, '/');
-        //session_start();
+        session_start();
         
         if (!empty($_SESSION['username'])) {
             self::$isLogged = TRUE;
@@ -34,7 +34,6 @@ class LoginModel extends BaseModel {
                  WHERE username = ?");
 
         $statement->bind_param('s', $username);
-
         $resultSet = $this->executeStatementWithResultArray($statement);
 
         if (!empty($resultSet) && password_verify($password, $resultSet[0]['pass_hash'])) {
@@ -49,16 +48,15 @@ class LoginModel extends BaseModel {
     public function userInfo($username, $password) {
         $statement = self::$db->prepare(
             "SELECT *
-             FROM users
-             WHERE username = ?");
-        $statement->bind_param('s', $username);
-        $statement->execute();
-        $resultSet = $statement->get_result();
-        $row = $resultSet->fetch_assoc();
+                 FROM users
+                 WHERE username = ?");
 
-        if (!empty($row) && password_verify($password, $resultSet['pass_hash'])) {
-            $_SESSION['username'] = $row['username'];
-            $_SESSION['user_id'] = $row['id'];
+        $statement->bind_param('s', $username);
+        $resultSet = $this->executeStatementWithResultArray($statement);
+
+        if (!empty($resultSet) && password_verify($password, $resultSet[0]['pass_hash'])) {
+            $_SESSION['username'] =  $resultSet[0]['username'];
+            $_SESSION['user_id'] =  $resultSet[0]['id'];
             return TRUE;
         }
 

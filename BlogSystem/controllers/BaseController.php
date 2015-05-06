@@ -32,7 +32,7 @@ abstract class BaseController {
 
     public function renderView($viewName = "Index", $includeLayout = true) {
         if (!$this->isViewRendered) {
-                   $viewFileName = 'views/' . $this->controllerName
+            $viewFileName = 'views/' . $this->controllerName
                 . '/' . $viewName . '.php';
             if ($includeLayout) {
                 $headerFile = 'views/layouts/' . $this->layoutName . '/header.php';
@@ -59,7 +59,7 @@ abstract class BaseController {
     }
 
     public function redirect(
-            $controllerName, $actionName = null, $params = null) {
+        $controllerName, $actionName = null, $params = null) {
         $url = '/' . urlencode($controllerName);
         if ($actionName != null) {
             $url .= '/' . urlencode($actionName);
@@ -72,11 +72,15 @@ abstract class BaseController {
     }
 
     function addMessage($msg, $type) {
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+
         if (!isset($_SESSION['messages'])) {
             $_SESSION['messages'] = array();
         };
-        array_push($_SESSION['messages'],
-            array('text' => $msg, 'type' => $type));
+
+        $_SESSION['messages'] = array('text' => $msg, 'type' => $type);
     }
 
     function addInfoMessage($msg) {
