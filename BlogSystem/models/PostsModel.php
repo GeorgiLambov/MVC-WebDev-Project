@@ -27,7 +27,7 @@ class PostsModel extends BaseModel{
                 LEFT JOIN tags t
                 ON pt.tag_id = t.id
                 WHERE t.text LIKE ?
-                ORDER BY p.DATE DESC");
+                ORDER BY p.DATE DESC, p.id DESC");
             $statement->bind_param("s", $tagName);
             return $this->executeStatementWithResultArray($statement);
         }

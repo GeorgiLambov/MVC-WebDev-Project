@@ -20,8 +20,8 @@ class RegisterController extends BaseController{
 
     function index() {
         if ($this->isPost) {
-            $userData = $this->getData();
-            if ($userData != NULL) {
+            $userData = $this->validateFormData();
+            if ($userData != NULL && $_POST['submitted'] = 1) {
                 $result = $this->registerModel->registerUser($userData);
 
                 if ($result) {
@@ -36,7 +36,7 @@ class RegisterController extends BaseController{
         $this->renderView();
     }
 
-    private function getData() {
+    private function validateFormData() {
         $rules = [
             'required' => [
                 ['username'],
@@ -52,6 +52,7 @@ class RegisterController extends BaseController{
                 ['password', 10]
             ],
             'alpha' => [
+                ['username'],
                 ['firstName'],
                 ['lastName'],
             ],

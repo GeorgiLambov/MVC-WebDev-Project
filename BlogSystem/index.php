@@ -27,12 +27,14 @@ $controllerFileName = "controllers/" . $controllerClassName . '.php';
 if (class_exists($controllerClassName)) {
     $controller = new $controllerClassName($controllerName, $action);
 } else {
+    //header("Location: " . '/');
     die("Cannot find controller '$controllerName' in class '$controllerFileName'");
 }
 
 if (method_exists($controller, $action)) {
     call_user_func_array(array($controller, $action), $params);
 } else {
+    //header("Location: " . '/');
     die("Cannot find action '$action' in controller '$controllerClassName'");
 }
 

@@ -8,6 +8,7 @@ class PostsController extends BaseController {
     public function onInit() {
        $this->postsModel = new PostsModel();
        $this->tagsModel = new TagsModel();
+       $this->posts = array();
     }
 
     public function index($days = NULL) {
@@ -18,12 +19,10 @@ class PostsController extends BaseController {
             }
         }
 
-        $this->posts = $this->postsModel->getAllPosts($tagName, $days);
-
-        $posts = array();
-        foreach ($this->posts as $post) {
+        $this->postsQwery = $this->postsModel->getAllPosts($tagName, $days);
+        foreach ($this->postsQwery as $post) {
             $post['tags'] = $this->tagsModel->getTagsFromPostId($post['id']);
-            $posts[] = $post;
+            $this->posts[] = $post;
         }
 
         $mostPopularTags = $this->tagsModel->getMostPopularTags();
@@ -31,7 +30,7 @@ class PostsController extends BaseController {
             $this->mostPopularTags = $mostPopularTags;
         }
 
-        $this->renderView(__FUNCTION__);
+        $this->renderView();
     }
 
     public function create() {
@@ -39,9 +38,9 @@ class PostsController extends BaseController {
             $this->redirectToUrl('/login/index');
         }
 
-        if (isset($_POST['submitted']) && $_POST['submitted'] == 1 ) {
+        if ($this->isPost && $_POST['submitted'] == 1) {
             $isAdded = FALSE;
-            $validData = $this->getAddPostFormData();
+            $validData = $this->validateFormData();
 
             if ($validData != NULL) {
                 $postData = $this->preparePostData($validData);
@@ -72,10 +71,10 @@ class PostsController extends BaseController {
 
     }
 
-    public function byPeriod($days) {
+    public function byDays($days) {
         if (!is_numeric($days)) {
             $this->addErrorMessage('Invalid URL');
-            $this->redirectTo('/posts/index');
+            $this->redirectToUrl('/');
         }
 
         $date = date_create(date(''));
@@ -84,7 +83,7 @@ class PostsController extends BaseController {
         $this->index($dateAsString);
     }
 
-    private function getAddPostFormData() {
+    private function validateFormData() {
         $rules = [
             'required' => [
                 ['title'],
@@ -142,9 +141,7 @@ class PostsController extends BaseController {
             $this->redirectTo('/posts/index');
         }
 
-        $this->model->updateCounter($id);
-
-       // $template = ROOT_DIR . $this->viewsDir . 'view.php';
+        $this->postsModel->updateCounter($id);
 
         if (isset($_POST['submitted']) && $_POST['submitted'] == 1) {
             $commentData = $this->getAddCommentFormData();

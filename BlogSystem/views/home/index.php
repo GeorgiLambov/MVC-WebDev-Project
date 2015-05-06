@@ -1,3 +1,3 @@
-<div class="jumbotron col-lg-8 col-md-8 col-sm-8"">
+<div class="jumbotron col-md-10 col-sm-6 col-xs-5"">
     <h3>Welcome to this Custom MVC Blog application</h3>
 </div>

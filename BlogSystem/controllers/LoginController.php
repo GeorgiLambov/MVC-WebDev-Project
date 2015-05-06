@@ -4,8 +4,8 @@ class LoginController extends BaseController {
 
     function index() {
         if ($this->isPost) {
-            $userData = $this->getData();
-            if ($userData != NULL) {
+            $userData = $this->validateFormData();
+            if ($userData != NULL && $_POST['submitted'] = 1) {
                 $isLoggedIn = $this->auth->logIn($userData['username'], $userData['password']);
 
                 if (isset($isLoggedIn) && $isLoggedIn == TRUE) {
@@ -21,7 +21,7 @@ class LoginController extends BaseController {
         $this->renderView();
     }
 
-    private function getData() {
+    private function validateFormData() {
         $rules = [
             'required' => [
                 ['username'],

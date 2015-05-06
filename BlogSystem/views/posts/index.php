@@ -1,15 +1,13 @@
-<?php if(!empty($posts)): ?>
-    <ul class="list-group">
-        <?php foreach ($posts as $post) :?>
+<?php if(!empty($this->posts)): ?>
+    <ul class="list-group col-lg-8 col-sm-8 col-xs-8">
+        <?php foreach ($this->posts as $post) :?>
         <a href="/posts/view/<?= $post['id'] ?>">
             <li class="list-group-item">
-              <span class="badge">
-                #<?= $post['id'] ?>
-              </span>
-                <span class="post-title"><?= htmlspecialchars($post['title']) ?></span>
+              <span class="badge">#<?= $post['id']?></span>
+                <span class="post-title"><?= htmlspecialchars($post['title'])?></span>
                 <p class="right">
                     <?php foreach ($post['tags'] as $tag):  ?>
-                    <span class="label label-info tag-right"><?php echo htmlspecialchars($tag['text']) ?></span>&nbsp;
+                    <span class="label label-info tag-right"><?php echo htmlspecialchars($tag['text'])?></span>&nbsp;
                     <?php endforeach; ?>
                 </p>
             </li>

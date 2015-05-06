@@ -109,11 +109,11 @@ UNLOCK TABLES;
 
 LOCK TABLES `posts` WRITE;
 /*!40000 ALTER TABLE `posts` DISABLE KEYS */;
-INSERT INTO `posts` VALUES (1,'Demo title','demo text  PHP for Dummies', 1,NULL,NULL),(2,'Demo title 2','demo2 text  PHP for Dummies', 1,NULL,NULL),
- (3,'3Demo title','demo text  PHP for Dummies', 1,NULL,NULL),(4,'4Demo title','demo text  PHP for Dummies', 1,NULL,NULL),
- (5,'Demo title','demo text  PHP for Dummies', 1,NULL,NULL),(6,'Demo title','demo text  PHP for Dummies', 1,NULL,NULL),
- (7,'Demo title','demo text  PHP for Dummies', 1,NULL,NULL),(8,'Demo title','demo text  PHP for Dummies', 1,NULL,NULL),
-(9,'Demo title','demo text  PHP for Dummies', 1,NULL,NULL),(10,'Demo title','demo text  PHP for Dummies', 1,NULL,NULL);
+INSERT INTO `posts` VALUES (1,'Demo title','demo text  PHP for Dummies', 1, '2015-02-13 13:47:04',NULL),(2,'Demo title 2','demo2 text  PHP for Dummies', 1,NULL,NULL),
+ (3,'3Demo title','demo text  PHP for Dummies', 1,'2015-05-01 13:47:04',NULL),(4,'4Demo title','demo text  PHP for Dummies', 1,NULL,NULL),
+ (5,'Demo title','demo text  PHP for Dummies', 1,'2014-03-13 13:47:04',NULL),(6,'Demo title','demo text  PHP for Dummies', 1,'2015-04-13 13:47:04',NULL),
+ (7,'Demo title','demo text  PHP for Dummies', 1,'2015-03-13 12:47:04',NULL),(8,'Demo title','demo text  PHP for Dummies', 1,'2015-01-13 13:47:04',NULL),
+(9,'Demo title','demo text  PHP for Dummies', 1,'2015-05-06 13:47:04',NULL),(10,'Demo title','demo text  PHP for Dummies', 1, '2015-01-13 13:47:00',NULL);
 /*!40000 ALTER TABLE `posts` ENABLE KEYS */;
 UNLOCK TABLES;
 

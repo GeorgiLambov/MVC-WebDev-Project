@@ -23,6 +23,10 @@
         <option value="BaseModel-&gt;executeStatementWithResultArray" />
         <option value="LoginModel-&gt;logIn" />
         <option value="BaseController-&gt;addInfoMessage" />
+        <option value="PostsController-&gt;byDays" />
+        <option value="PostsModel-&gt;getAllPosts" />
+        <option value="BaseModel-&gt;processResultSet" />
+        <option value="PostsController-&gt;create" />
       </list>
     </option>
   </component>

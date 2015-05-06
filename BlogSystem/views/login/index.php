@@ -31,6 +31,7 @@
         </div>
         <div class="col-md-10 col-md-offset-2">
             <button type="reset" class="btn btn-default">Cancel</button>
+            <input type="hidden" name="submitted" class="btn btn-default" value="1">
             <button type="submit" class="btn btn-primary">Submit</button>
         </div>
     </fieldset>
