@@ -1,5 +1,5 @@
 <?php if(!empty($this->posts)): ?>
-    <ul class="list-group col-lg-8 col-sm-8 col-xs-8">
+    <ul class="list-group col-lg-offset-1 col-lg-6 col-sm-6 col-xs-6">
         <?php foreach ($this->posts as $post) :?>
         <a href="/posts/view/<?= $post['id'] ?>">
             <li class="list-group-item">

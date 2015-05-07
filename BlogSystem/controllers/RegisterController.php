@@ -19,9 +19,9 @@ class RegisterController extends BaseController{
     }
 
     function index() {
-        if ($this->isPost) {
+        if ($this->isPost && $_POST['submitted'] == 1) {
             $userData = $this->validateFormData();
-            if ($userData != NULL && $_POST['submitted'] = 1) {
+            if ($userData != NULL ) {
                 $result = $this->registerModel->registerUser($userData);
 
                 if ($result) {

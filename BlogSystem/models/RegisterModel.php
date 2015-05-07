@@ -23,7 +23,6 @@ class RegisterModel extends BaseModel {
             return FALSE;
         }
 
-        $admin = 1;
         $pass_hash = password_hash($password, PASSWORD_BCRYPT);
 
         $statement = self::$db->prepare(

@@ -82,7 +82,7 @@ class PostsModel extends BaseModel{
         $insertTagsStatement = self::$db->prepare($tagsInsertQuery);
         $isertTagsResult = $this->executeStatement($insertTagsStatement);
 
-        if (!$isertTagsResult) {
+        if (!$isertTagsResult && !$postInsertResult) {
             self::$db->trans_rollback();
             return FALSE;
         }

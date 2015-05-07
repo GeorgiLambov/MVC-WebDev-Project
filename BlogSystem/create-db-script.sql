@@ -21,9 +21,9 @@ CREATE TABLE `blog_system`.`users` (
   `first_name` varchar(45) NULL,
   `last_name` varchar(45) NULL,
   `username` varchar(45) NOT NULL,
-  `pass_hash` varchar(100)  NULL,
+  `pass_hash` varchar(100) NOT NULL,
   `email` varchar(45)  NULL,
-  `is_admin` bit(1) NOT NULL DEFAULT b'0',
+  `is_admin` bit(1) NULL DEFAULT b'0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `username_UNIQUE` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -102,18 +102,32 @@ CREATE TABLE `blog_system`.`posts_tags` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users`*/;
-INSERT INTO `users` VALUES (1,'fname', 'lname','user', NULL, NULL, 0);
+INSERT INTO `users` VALUES (1,'fname', 'lname','admin', '$2y$10$Ig9basKY2gJMGrp.E0xpGej/6nqwOFr1psOcpjXKLGCq7eNFXOdsW', NULL, 1);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
 
 LOCK TABLES `posts` WRITE;
 /*!40000 ALTER TABLE `posts` DISABLE KEYS */;
-INSERT INTO `posts` VALUES (1,'Demo title','demo text  PHP for Dummies', 1, '2015-02-13 13:47:04',NULL),(2,'Demo title 2','demo2 text  PHP for Dummies', 1,NULL,NULL),
- (3,'3Demo title','demo text  PHP for Dummies', 1,'2015-05-01 13:47:04',NULL),(4,'4Demo title','demo text  PHP for Dummies', 1,NULL,NULL),
- (5,'Demo title','demo text  PHP for Dummies', 1,'2014-03-13 13:47:04',NULL),(6,'Demo title','demo text  PHP for Dummies', 1,'2015-04-13 13:47:04',NULL),
- (7,'Demo title','demo text  PHP for Dummies', 1,'2015-03-13 12:47:04',NULL),(8,'Demo title','demo text  PHP for Dummies', 1,'2015-01-13 13:47:04',NULL),
-(9,'Demo title','demo text  PHP for Dummies', 1,'2015-05-06 13:47:04',NULL),(10,'Demo title','demo text  PHP for Dummies', 1, '2015-01-13 13:47:00',NULL);
+INSERT INTO `posts` VALUES 
+(1,'Demo title What is Hack?','Hack is a programming language for HHVM that interoperates seamlessly with PHP. Hack reconciles the fast development cycle of PHP with the discipline provided by static typing, while adding many features commonly found in other modern programming languages.
+
+Hack provides instantaneous type checking via a local server that watches the filesystem. It typically runs in less than 200 milliseconds, making it easy to integrate into your development workflow without introducing a noticeable delay.', 1, '2015-05-06 13:40:04', NULL),
+(2,'Demo About','This is an example of a page. Unlike posts, which are displayed on your blog’s front page in the order they’re published, pages are better suited for more timeless content that you want to be easily accessible, like your About or Contact information.', 1, '2015-04-07 13:47:04',NULL),
+(3,'Demo About','This is an example of a page. Unlike posts, which are displayed on your blog’s front page in the order they’re published, pages are better suited for more timeless content that you want to be easily accessible, like your About or Contact information.', 1, '2015-03-17 13:47:04',NULL),
+(4,'Demo About','This is an example of a page. Unlike posts, which are displayed on your blog’s front page in the order they’re published, pages are better suited for more timeless content that you want to be easily accessible, like your About or Contact information.', 1, '2015-02-27 13:47:04',NULL),
+(5,'Demo About','This is an example of a page. Unlike posts, which are displayed on your blog’s front page in the order they’re published, pages are better suited for more timeless content that you want to be easily accessible, like your About or Contact information.', 1, '2015-01-06 13:47:04',NULL),
+(6,'Demo About','This is an example of a page. Unlike posts, which are displayed on your blog’s front page in the order they’re published, pages are better suited for more timeless content that you want to be easily accessible, like your About or Contact information.', 1, '2015-05-07 13:47:04',NULL),
+(7,'Demo About','This is an example of a page. Unlike posts, which are displayed on your blog’s front page in the order they’re published, pages are better suited for more timeless content that you want to be easily accessible, like your About or Contact information.', 1, '2015-02-07 13:47:04',NULL),
+(8,'Demo About','This is an example of a page. Unlike posts, which are displayed on your blog’s front page in the order they’re published, pages are better suited for more timeless content that you want to be easily accessible, like your About or Contact information.', 1, '2015-03-07 13:47:04',NULL),
+(9,'Demo About','This is an example of a page. Unlike posts, which are displayed on your blog’s front page in the order they’re published, pages are better suited for more timeless content that you want to be easily accessible, like your About or Contact information.', 1, '2015-04-07 13:47:04',NULL),
+(10,'Demo About','This is an example of a page. Unlike posts, which are displayed on your blog’s front page in the order they’re published, pages are better suited for more timeless content that you want to be easily accessible, like your About or Contact information.', 1, '2014-05-07 13:47:04',NULL),
+(11,'Demo About','This is an example of a page. Unlike posts, which are displayed on your blog’s front page in the order they’re published, pages are better suited for more timeless content that you want to be easily accessible, like your About or Contact information.', 1, '2014-12-17 13:47:04',NULL),
+(12,'Demo About','This is an example of a page. Unlike posts, which are displayed on your blog’s front page in the order they’re published, pages are better suited for more timeless content that you want to be easily accessible, like your About or Contact information.', 1, '2013-05-27 13:47:04',NULL),
+(13,'Demo About','This is an example of a page. Unlike posts, which are displayed on your blog’s front page in the order they’re published, pages are better suited for more timeless content that you want to be easily accessible, like your About or Contact information.', 1, '2011-08-07 13:47:04',NULL),
+(14,'Demo About','This is an example of a page. Unlike posts, which are displayed on your blog’s front page in the order they’re published, pages are better suited for more timeless content that you want to be easily accessible, like your About or Contact information.', 1, '2014-06-27 13:47:04',NULL),
+(15,'Demo About','This is an example of a page. Unlike posts, which are displayed on your blog’s front page in the order they’re published, pages are better suited for more timeless content that you want to be easily accessible, like your About or Contact information.', 1, '2015-03-27 13:47:04',NULL),
+(16,'Demo About','This is an example of a page. Unlike posts, which are displayed on your blog’s front page in the order they’re published, pages are better suited for more timeless content that you want to be easily accessible, like your About or Contact information.', 1, '2015-04-20 13:47:04',NULL);
 /*!40000 ALTER TABLE `posts` ENABLE KEYS */;
 UNLOCK TABLES;
 

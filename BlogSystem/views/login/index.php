@@ -1,4 +1,4 @@
-<form class="form-horizontal col-lg-6 col-sm-6 col-xs-6" role="form" method="POST" name="login">
+<form class="form-horizontal col-lg-offset-1 col-lg-6 col-sm-6 col-xs-6" role="form" method="POST" name="login">
     <fieldset>
         <legend>Login</legend>
         <div class="form-group col-md-12">

@@ -47,7 +47,7 @@ class PostsController extends BaseController {
                 $postData['author_id'] = $this->auth->getLoggedUser()['id'];
                 $postData['visits'] = 0;
                 $postData['date'] = date('Y-m-d H:m:s', time());
-                $isAdded = $this->model->addPost($postData);
+                $isAdded = $this->postsModel->addPost($postData);
 
                 if ($isAdded) {
                     $this->addInfoMessage('Post created successfully!');

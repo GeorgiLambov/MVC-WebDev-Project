@@ -13,7 +13,6 @@
         <?php endforeach; ?>
     </div>
 <?php endif; ?>
-
 </div>
 <script type="text/javascript" src="/content/bootstrap/js/bootstrap.js"></script>
 <script type="text/javascript" src="/content/paging/public/javascript/zebra_pagination.js"></script>
