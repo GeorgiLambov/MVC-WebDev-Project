@@ -1,5 +1,5 @@
 <?php if(!empty($this->posts)): ?>
-    <ul class="list-group col-lg-offset-1 col-lg-6 col-sm-6 col-xs-6">
+    <ul class="list-group  col-lg-6 col-sm-6 col-xs-6">
         <?php foreach ($this->posts as $post) :?>
             <li class="list-group-item">
                 <span class="badge">#<?= $post['id']?></span>

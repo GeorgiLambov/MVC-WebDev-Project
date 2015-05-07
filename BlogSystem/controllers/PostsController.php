@@ -41,13 +41,14 @@ class PostsController extends BaseController {
 
         if ($this->isPost && $_POST['submitted'] == 1) {
             $isAdded = FALSE;
-            $validData = $this->validateFormData();
+            $validData = $this->validatePostFormData();
 
             if ($validData != NULL) {
                 $postData = $this->preparePostData($validData);
                 $postData['author_id'] = $this->auth->getLoggedUser()['id'];
                 $postData['visits'] = 0;
-                $postData['date'] = date('Y-m-d H:m:s', time());
+                $date = date_create(date(''));
+                $postData['date'] = date_format($date, 'Y-m-d H:i:s');
                 $isAdded = $this->postsModel->addPost($postData);
 
                 if ($isAdded) {
@@ -58,6 +59,37 @@ class PostsController extends BaseController {
                 }
             }
         }
+
+        $this->renderView(__FUNCTION__);
+    }
+
+    public function view($id = array()) {
+        if (!is_numeric($id)) {
+            $this->addErrorMessage('Invalid URL');
+            $this->redirectToUrl('/');
+        }
+
+        $this->postsModel->updateCounter($id);
+
+        if ($this->isPost && $_POST['submitted'] == 1) {
+            $commentData = $this->validateCommentFormData();
+
+            if ($commentData != NULL) {
+                $commentData['post_id'] = $id;
+                $date = date_create(date(''));
+                $commentData['date'] = date_format($date, 'Y-m-d H:i:s');
+                $isAdded = $this->commentsModel->insertComment($commentData);
+                if ($isAdded) {
+                    $this->addInfoMessage('Comment add successfully!');
+                    $this->redirectToUrl("/posts/view/$id");
+                } else {
+                    $this->addErrorMessage('Error creating comment! Please try again later!');
+                }
+            }
+        }
+
+        $this->post = $this->postsModel->getPostById($id)[0];
+        $this->comments = $this->commentsModel->getAllCommentsFromPost($id);
 
         $this->renderView(__FUNCTION__);
     }
@@ -81,7 +113,7 @@ class PostsController extends BaseController {
         $this->index($dateAsString);
     }
 
-    private function validateFormData() {
+    private function validatePostFormData() {
         $rules = [
             'required' => [
                 ['title'],
@@ -98,13 +130,13 @@ class PostsController extends BaseController {
                 ['tag5', 3]
             ],
             'lengthMax' => [
-                ['title', 200],
-                ['text', 1000],
-                ['tag1', 20],
-                ['tag2', 20],
-                ['tag3', 20],
-                ['tag4', 20],
-                ['tag5', 20]
+                ['title', 100],
+                ['text', 500],
+                ['tag1', 30],
+                ['tag2', 30],
+                ['tag3', 30],
+                ['tag4', 30],
+                ['tag5', 30]
             ],
             'slug' => [
                 ['tag1'],
@@ -112,6 +144,31 @@ class PostsController extends BaseController {
                 ['tag3'],
                 ['tag4'],
                 ['tag5']
+            ]
+        ];
+
+        return $this->makeValidation($rules);
+    }
+
+    private function validateCommentFormData() {
+        $rules = [
+            'required' => [
+                ['author'],
+                ['text']
+            ],
+            'lengthMin' => [
+                ['author', 5],
+                ['text', 5]
+            ],
+            'lengthMax' => [
+                ['author', 20],
+                ['text', 500]
+            ],
+            'slug' => [
+                ['author']
+            ],
+            'email' => [
+                ['email']
             ]
         ];
 
@@ -133,34 +190,5 @@ class PostsController extends BaseController {
         return $data;
     }
 
-    public function view($id = array()) {
-        if (!is_numeric($id)) {
-            $this->addErrorMessage('Invalid URL');
-            $this->redirectToUrl('/');
-        }
-
-        $this->postsModel->updateCounter($id);
-
-        if (isset($_POST['submitted']) && $_POST['submitted'] == 1) {
-            $commentData = $this->getAddCommentFormData();
-
-            if ($commentData != NULL) {
-                $commentData['post_id'] = $id;
-                $commentData['date'] = date('Y-m-d H:m:s', time());
-                $isAdded = $this->model->insertComment($commentData);
-                if ($isAdded) {
-                    $this->addMessage('Your comment in the system now ;)', 'info');
-                    $this->redirectTo("/posts/view/$id");
-                } else {
-                    $this->addMessage('Post is not recorded in database! Please try again later!', 'error');
-                }
-            }
-        }
-
-        $post = $this->postsModel->getPostById($id)[0];
-        $comments = $this->commentsModel->getAllCommentsFromPost($id);
-
-        $this->renderView(__FUNCTION__);
-    }
 
 }

@@ -17,7 +17,6 @@ class CommentsModel extends BaseModel
     public function insertComment($commentData)
     {
         $queryData = array();
-        $queryData['table'] = 'comments';
         $queryData['columns'] = 'author, email, text, post_id, date';
         $queryData['values'] =
             "'" . mysql_real_escape_string($commentData['author']) . "', '"

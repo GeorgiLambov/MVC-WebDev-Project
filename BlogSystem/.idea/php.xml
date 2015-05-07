@@ -29,6 +29,9 @@
         <option value="PostsController-&gt;create" />
         <option value="PostsController-&gt;view" />
         <option value="PostsModel-&gt;addPost" />
+        <option value="BaseModel-&gt;getById" />
+        <option value="TagsModel-&gt;getMostPopularTags" />
+        <option value="PostsModel-&gt;getPostById" />
       </list>
     </option>
   </component>

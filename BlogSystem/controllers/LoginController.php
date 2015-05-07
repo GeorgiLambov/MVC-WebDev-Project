@@ -5,7 +5,7 @@ class LoginController extends BaseController {
     function index() {
         if ($this->isPost) {
             $userData = $this->validateFormData();
-            if ($userData != NULL && $_POST['submitted'] = 1) {
+            if ($userData != NULL && $_POST['submitted'] == 1) {
                 $isLoggedIn = $this->auth->logIn($userData['username'], $userData['password']);
 
                 if (isset($isLoggedIn) && $isLoggedIn == TRUE) {

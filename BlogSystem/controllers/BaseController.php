@@ -50,7 +50,7 @@ abstract class BaseController {
     function makeDateInFormat($dateStr)
     {
         $date = new \DateTime($dateStr);
-        return $date->format('d M y');
+        return $date->format('M d, Y');
     }
 
     public function redirectToUrl($url) {

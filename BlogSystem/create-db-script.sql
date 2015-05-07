@@ -39,7 +39,7 @@ DROP TABLE IF EXISTS `blog_system`.`tags`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `blog_system`.`tags` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `text` varchar(50) NOT NULL,
+  `text` varchar(30) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -50,8 +50,8 @@ DROP TABLE IF EXISTS `blog_system`.`posts`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `blog_system`.`posts` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(50) NOT NULL,
-  `text` varchar(200) NOT NULL,
+  `title` varchar(100) NOT NULL,
+  `text` varchar(500) NOT NULL,
   `author_id` int(11) NOT NULL,
   `date` datetime DEFAULT NULL,
   `visits` int(11) DEFAULT NULL,
