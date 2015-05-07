@@ -123,11 +123,11 @@ class PostsController extends BaseController {
             'lengthMin' => [
                 ['title', 5],
                 ['text', 5],
-                ['tag1', 3],
-                ['tag2', 3],
-                ['tag3', 3],
-                ['tag4', 3],
-                ['tag5', 3]
+                ['tag1', 2],
+                ['tag2', 2],
+                ['tag3', 2],
+                ['tag4', 2],
+                ['tag5', 2]
             ],
             'lengthMax' => [
                 ['title', 100],
