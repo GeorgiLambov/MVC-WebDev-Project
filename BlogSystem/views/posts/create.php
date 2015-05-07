@@ -33,57 +33,59 @@
                 <input type="text" class="form-control" name="tag1" id="tag1"
                        placeholder="Tag"
                        value="<?= isset($_POST['tag1']) ? htmlspecialchars($_POST['tag1'] ): ''  ?>">
-                <?php if(isset($this->fieldsErrors['tag1'])) :?>
-                    <div class="alert alert-dismissible alert-danger">
-                        <button type="button" class="close" data-dismiss="alert">×</button>
-                        <strong><?php echo $this->fieldsErrors['tag1']; ?></strong>
-                    </div>
-                <?php endif;?>
             </div>
             <div class="col-xs-3 col-lg-2">
                 <input type="text" class="form-control" name="tag2"
                        placeholder="Tag"
                        value="<?= isset($_POST['tag2']) ? htmlspecialchars($_POST['tag2'] ): ''  ?>">
-                <?php if(isset($this->fieldsErrors['tag2'])) :?>
-                    <div class="alert alert-dismissible alert-danger">
-                        <button type="button" class="close" data-dismiss="alert">×</button>
-                        <strong><?php echo $this->fieldsErrors['tag2']; ?></strong>
-                    </div>
-                <?php endif;?>
             </div>
             <div class="col-xs-3 col-lg-2">
                 <input type="text" class="form-control" name="tag3"
                        placeholder="Tag"
                        value="<?= isset($_POST['tag3']) ? htmlspecialchars($_POST['tag3'] ): ''  ?>">
-                <?php if(isset($this->fieldsErrors['tag3'])) :?>
-                    <div class="alert alert-dismissible alert-danger">
-                        <button type="button" class="close" data-dismiss="alert">×</button>
-                        <strong><?php echo $this->fieldsErrors['tag3']; ?></strong>
-                    </div>
-                <?php endif;?>
             </div>
             <div class="col-xs-3 col-lg-2">
                 <input type="text" class="form-control" name="tag4"
                        placeholder="Tag"
                        value="<?= isset($_POST['tag4']) ? htmlspecialchars($_POST['tag4'] ): ''  ?>">
-                <?php if(isset($this->fieldsErrors['tag4'])) :?>
-                    <div class="alert alert-dismissible alert-danger">
-                        <button type="button" class="close" data-dismiss="alert">×</button>
-                        <strong><?php echo $this->fieldsErrors['tag4']; ?></strong>
-                    </div>
-                <?php endif;?>
             </div>
             <div class="col-xs-3 col-lg-2">
                 <input type="text" class="form-control" name="tag5"
                        placeholder="Tag"
                        value="<?= isset($_POST['tag5']) ? htmlspecialchars($_POST['tag5'] ): ''  ?>">
-                <?php if(isset($this->fieldsErrors['tag5'])) :?>
-                    <div class="alert alert-dismissible alert-danger">
-                        <button type="button" class="close" data-dismiss="alert">×</button>
-                        <strong><?php echo $this->fieldsErrors['tag5']; ?></strong>
-                    </div>
-                <?php endif;?>
             </div>
+        </div>
+        <div class="form-group col-md-12">
+            <?php if(isset($this->fieldsErrors['tag1'])) :?>
+                <div class="alert alert-dismissible alert-danger">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    <strong><?php echo $this->fieldsErrors['tag1']; ?></strong>
+                </div>
+            <?php endif;?>
+            <?php if(isset($this->fieldsErrors['tag2'])) :?>
+                <div class="alert alert-dismissible alert-danger">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    <strong><?php echo $this->fieldsErrors['tag2']; ?></strong>
+                </div>
+            <?php endif;?>
+            <?php if(isset($this->fieldsErrors['tag3'])) :?>
+                <div class="alert alert-dismissible alert-danger">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    <strong><?php echo $this->fieldsErrors['tag3']; ?></strong>
+                </div>
+            <?php endif;?>
+            <?php if(isset($this->fieldsErrors['tag4'])) :?>
+                <div class="alert alert-dismissible alert-danger">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    <strong><?php echo $this->fieldsErrors['tag4']; ?></strong>
+                </div>
+            <?php endif;?>
+            <?php if(isset($this->fieldsErrors['tag5'])) :?>
+                <div class="alert alert-dismissible alert-danger">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    <strong><?php echo $this->fieldsErrors['tag5']; ?></strong>
+                </div>
+            <?php endif;?>
         </div>
         <div class="col-lg-10 col-lg-offset-2">
             <input type="hidden" value="1" name="submitted"/>

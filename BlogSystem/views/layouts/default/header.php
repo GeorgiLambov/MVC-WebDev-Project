@@ -66,5 +66,4 @@
             <a href="/posts/byDays/30" class="btn btn-default">Last month</a>
             <a href="/posts/byDays/365" class="btn btn-default">Last year</a>
         </div>
-    <br/>
 

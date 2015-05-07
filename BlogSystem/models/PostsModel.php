@@ -29,16 +29,17 @@ class PostsModel extends BaseModel{
                 WHERE t.text LIKE ?
                 ORDER BY p.DATE DESC, p.id DESC");
             $statement->bind_param("s", $tagName);
+
             return $this->executeStatementWithResultArray($statement);
         }
 
         if ($date != NULL) {
             return $this->find(array(
-                'order' => 'date DESC',
+                'order' => 'date DESC, id DESC',
                 'where' => "date >= '$date'" ));
         }
 
-        return $this->find(array('order' => 'date DESC'));
+        return $this->find(array('order' => 'date DESC, id DESC'));
     }
 
     public function getByDate($date) {
@@ -63,6 +64,7 @@ class PostsModel extends BaseModel{
     }
 
     public function addPost($postData) {
+        // Insert  Post
         $queryData = array();
         $queryData['columns'] = 'author_id, text, visits, title, date';
         $queryData['values'] =
@@ -75,6 +77,7 @@ class PostsModel extends BaseModel{
         self::$db->autocommit(FALSE);
         $postInsertResult = $this->insert($queryData);
         $post_id = self::$db->insert_id;
+
         // Insert Tags from Post
         $tagsInsertQuery = "INSERT IGNORE INTO tags(text) VALUES";
         $tagsInsertQuery .= "('" . implode("'), ('", $postData['tags']) . "')";
@@ -101,7 +104,7 @@ class PostsModel extends BaseModel{
             $finalTagsIdsList[] = $value['id'];
         }
 
-        // posts_tags insertation preaparation
+        // Insert posts_tags
         $postsTagsQueryData = array(
             'table' => 'posts_tags',
             'columns' => 'post_id, tag_id',
@@ -122,7 +125,6 @@ class PostsModel extends BaseModel{
 
      public function updateCounter($id) {
         $queryData = array();
-        $queryData['table'] = 'posts';
         $queryData['set'] = "visits = visits + 1";
         $queryData['where'] = "id = " . mysql_real_escape_string($id);
         return $this->update($queryData);

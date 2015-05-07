@@ -1,14 +1,15 @@
 <?php
 
-
 class PostsController extends BaseController {
     private $postsModel;
     private $tagsModel;
+    private $commentsModel;
 
     public function onInit() {
-       $this->postsModel = new PostsModel();
-       $this->tagsModel = new TagsModel();
-       $this->posts = array();
+        $this->postsModel = new PostsModel();
+        $this->tagsModel = new TagsModel();
+        $this->commentsModel = new CommentsModel();
+        $this->posts = array();
     }
 
     public function index($days = NULL) {
@@ -52,13 +53,10 @@ class PostsController extends BaseController {
                 if ($isAdded) {
                     $this->addInfoMessage('Post created successfully!');
                     $this->redirectToUrl('/posts/index');
+                }else {
+                    $this->addErrorMessage("Error creating post!");
                 }
-
-                $this->addErrorMessage("Error creating post!");
             }
-          else {
-              $this->addErrorMessage("All fields are mandatory!");
-               }
         }
 
         $this->renderView(__FUNCTION__);
@@ -135,10 +133,10 @@ class PostsController extends BaseController {
         return $data;
     }
 
-    public function view($id) {
+    public function view($id = array()) {
         if (!is_numeric($id)) {
             $this->addErrorMessage('Invalid URL');
-            $this->redirectTo('/posts/index');
+            $this->redirectToUrl('/');
         }
 
         $this->postsModel->updateCounter($id);
@@ -159,9 +157,10 @@ class PostsController extends BaseController {
             }
         }
 
-        $post = $this->model->getPostById($id)[0];
-        $comments = $this->model->getAllCommentsForPost($id);
-        include_once $this->layout;
+        $post = $this->postsModel->getPostById($id)[0];
+        $comments = $this->commentsModel->getAllCommentsFromPost($id);
+
+        $this->renderView(__FUNCTION__);
     }
 
 }

@@ -27,6 +27,8 @@
         <option value="PostsModel-&gt;getAllPosts" />
         <option value="BaseModel-&gt;processResultSet" />
         <option value="PostsController-&gt;create" />
+        <option value="PostsController-&gt;view" />
+        <option value="PostsModel-&gt;addPost" />
       </list>
     </option>
   </component>

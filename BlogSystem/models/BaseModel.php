@@ -53,7 +53,7 @@ abstract class BaseModel {
         $args = array_merge($defaults, $args);
         extract($args);
         $query = "UPDATE {$table} SET {$set} WHERE {$where}";
-        $resultSet = $this->db->query($query);
+        $resultSet = self::$db->query($query);
         if (gettype($resultSet) == 'boolean') {
             return $resultSet;
         }

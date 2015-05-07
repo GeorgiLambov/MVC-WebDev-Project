@@ -1,7 +1,5 @@
 <?php
 
-namespace Models;
-
 class CommentsModel extends BaseModel
 {
     public function __construct($args = array())
@@ -9,10 +7,9 @@ class CommentsModel extends BaseModel
         parent::__construct(array('table' => 'comments'));
     }
 
-    public function getAllCommentsFromPostId($id)
+    public function getAllCommentsFromPost($id)
     {
         $queryData = array();
-        $queryData['table'] = "comments";
         $queryData['where'] = "post_id = " . mysql_real_escape_string($id);
         return $this->find($queryData);
     }

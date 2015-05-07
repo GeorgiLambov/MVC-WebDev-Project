@@ -1,6 +1,6 @@
 <?php if(isset($this->mostPopularTags)): ?>
     <div class="col-xs-2">
-        <?php foreach ($mostPopularTags as $mostPopularTag) :?>
+        <?php foreach ($this->mostPopularTags as $mostPopularTag) :?>
             <ul class="breadcrumb">
                 <li class="active">
                     <?php echo htmlspecialchars($mostPopularTag['text']) ?>
