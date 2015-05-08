@@ -24,6 +24,7 @@ class CommentsModel extends BaseModel
             . mysql_real_escape_string($commentData['text']) . "', '"
             . mysql_real_escape_string($commentData['post_id']) . "', '"
             . mysql_real_escape_string($commentData['date']) . "'";
+
         return $this->insert($queryData);
     }
 }

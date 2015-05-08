@@ -100,7 +100,7 @@ class PostsModel extends BaseModel{
 
             $existingTagId =  $existingTag['id'];
             if(!in_array($existingTagId, $finalTagsIdsList)){
-                $finalTagsIdsList[] = $existingTag['id'];
+                $finalTagsIdsList[] = $existingTagId;
             }
 
         }

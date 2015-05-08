@@ -1,6 +1,6 @@
 <script type="text/javascript" src="/content/comment-form.js"></script>
 <div class="panel panel-default col-lg-10 col-sm-10 col-xs-10">
-    <div class="panel-heading">
+    <div class="well well-lg col-lg-12">
         <div class="row">
             <div class="panel-title col-lg-12"><?= htmlspecialchars($this->post['title'])?></div>
             <div class="col-lg-10 text-right">
@@ -20,17 +20,15 @@
         <br/>
         <div class="row">
             <div class="col-lg-12 text-right">
-                <input name="comment" class="btn btn-primary" type="button" value="Leave a Reply" onclick="showCommentForm()" id="showBtn"/>
                 <span >Post#: <?= htmlspecialchars($this->post['id'])?></span>
             </div>
         </div>
     </div>
     <?php foreach ($this->comments as $comment): ?>
-        <div class="well well-lg">
+        <div class="well well-lg col-lg-12">
             <div class="text-left col-lg-10">
-                <span>Author: <?= htmlspecialchars($comment['author'] ) ?>: </span>
-
-                Text: <?= htmlspecialchars($comment['text']) ?>
+                <p>Author: <?= htmlspecialchars($comment['author'] ) ?>: </p>
+                <p>Text: <?= htmlspecialchars($comment['text']) ?></p>
             </div>
             <div class="text-right col-lg-2">
                 <?= htmlspecialchars($this->makeDateInFormat($comment['date'])) ?>

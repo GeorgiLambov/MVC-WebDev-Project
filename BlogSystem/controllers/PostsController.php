@@ -157,7 +157,7 @@ class PostsController extends BaseController {
                 ['text']
             ],
             'lengthMin' => [
-                ['author', 5],
+                ['author', 3],
                 ['text', 5]
             ],
             'lengthMax' => [
