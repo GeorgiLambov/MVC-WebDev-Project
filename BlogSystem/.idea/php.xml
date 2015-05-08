@@ -32,6 +32,9 @@
         <option value="BaseModel-&gt;getById" />
         <option value="TagsModel-&gt;getMostPopularTags" />
         <option value="PostsModel-&gt;getPostById" />
+        <option value="PostsModel-&gt;findTagsId" />
+        <option value="PostsModel-&gt;findExistingTag" />
+        <option value="BaseModel-&gt;insert" />
       </list>
     </option>
   </component>

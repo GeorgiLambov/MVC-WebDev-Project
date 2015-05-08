@@ -41,7 +41,7 @@ CREATE TABLE `blog_system`.`tags` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `text` varchar(30) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 
@@ -58,7 +58,7 @@ CREATE TABLE `blog_system`.`posts` (
   PRIMARY KEY (`id`),
   KEY `fk_post_authors_idx` (`author_id`),
   CONSTRAINT `fk_post_authors` FOREIGN KEY (`author_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 DROP TABLE IF EXISTS `blog_system`.`comments`;
@@ -74,7 +74,7 @@ CREATE TABLE `blog_system`.`comments` (
   PRIMARY KEY (`id`),
   KEY `fk_comments_posts_idx` (`post_id`),
   CONSTRAINT `fk_comments_posts` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 DROP TABLE IF EXISTS `blog_system`.`posts_tags`;
@@ -87,7 +87,7 @@ CREATE TABLE `blog_system`.`posts_tags` (
    CONSTRAINT `fk_posts_tags` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
    KEY `fk_tags_posts_idx` (`tag_id`),
    CONSTRAINT `fk_tags_posts` FOREIGN KEY (`tag_id`) REFERENCES `tags` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 
@@ -130,10 +130,6 @@ Hack provides instantaneous type checking via a local server that watches the fi
 (16,'Demo About','This is an example of a page. Unlike posts, which are displayed on your blog’s front page in the order they’re published, pages are better suited for more timeless content that you want to be easily accessible, like your About or Contact information.', 1, '2015-04-20 13:47:04',0);
 /*!40000 ALTER TABLE `posts` ENABLE KEYS */;
 UNLOCK TABLES;
-
-
-
-
 
 
 

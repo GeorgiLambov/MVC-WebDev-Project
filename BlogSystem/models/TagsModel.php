@@ -1,7 +1,5 @@
 <?php
 
-
-
 class TagsModel extends BaseModel{
 
     public function __construct($args = array()) {

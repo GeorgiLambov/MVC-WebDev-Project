@@ -14,7 +14,7 @@ class PostsModel extends BaseModel{
         if ($tagName != NULL) {
             $tagName = '%' . mysql_real_escape_string($tagName) . '%';
             $statement = self::$db->prepare(
-                "SELECT 
+                "SELECT
                     p.id,
                     p.text,
                     p.title,
@@ -44,13 +44,13 @@ class PostsModel extends BaseModel{
 
     public function getByDate($date) {
         $statement = self::$db->prepare(
-            "SELECT 
+            "SELECT
                 p.id,
                 p.text,
                 p.author_id,
                 p.visits,
                 p.title,
-                p.date    
+                p.date
             FROM posts p
             LEFT JOIN posts_tags pt
             ON p.id = pt.post_id
@@ -77,31 +77,32 @@ class PostsModel extends BaseModel{
         self::$db->autocommit(FALSE);
         $postInsertResult = $this->insert($queryData);
         $post_id = self::$db->insert_id;
-
-        // Insert Tags from Post
-        $tagsInsertQuery = "INSERT IGNORE INTO tags(text) VALUES";
-        $tagsInsertQuery .= "('" . implode("'), ('", $postData['tags']) . "')";
-
-        $insertTagsStatement = self::$db->prepare($tagsInsertQuery);
-        $isertTagsResult = $this->executeStatement($insertTagsStatement);
-
-        if (!$isertTagsResult && !$postInsertResult) {
-            self::$db->trans_rollback();
-            return FALSE;
-        }
-
-        $getTagsIdQuery = "SELECT t.id FROM tags t WHERE t.text IN ";
-        $getTagsIdQuery .= "('" . implode("', '", $postData['tags']) . "')";
-        $getTagsIdStatement =  self::$db->prepare($getTagsIdQuery);
-        $tagsIds = $this->executeStatementWithResultArray($getTagsIdStatement);
-        if (count($tagsIds) < 1) {
-            self::$db->rollback();
-            return FALSE;
-        }
-
         $finalTagsIdsList = array();
-        foreach ($tagsIds as $value) {
-            $finalTagsIdsList[] = $value['id'];
+
+        // Check existing tag
+        foreach ($postData['tags'] as $tag) {
+            $tagText = mysql_real_escape_string($tag);
+            $existingTag = $this->findExistingTag($tagText);
+
+            // not exist in DB
+            if (!$existingTag) {
+                $tagInsertQuery = "INSERT IGNORE INTO tags(text) VALUES ('$tagText')";
+                $insertTagStatement = self::$db->prepare($tagInsertQuery);
+                $insertTagsResult= $this->executeStatement($insertTagStatement);
+
+                if (!$insertTagsResult && !$postInsertResult) {
+                    self::$db->trans_rollback();
+                    return FALSE;
+                }
+
+                $existingTag = $this->findExistingTag($tagText);
+            }
+
+            $existingTagId =  $existingTag['id'];
+            if(!in_array($existingTagId, $finalTagsIdsList)){
+                $finalTagsIdsList[] = $existingTag['id'];
+            }
+
         }
 
         // Insert posts_tags
@@ -112,7 +113,6 @@ class PostsModel extends BaseModel{
         );
 
         $postsTagsInsertResult = $this->insert($postsTagsQueryData);
-
         if (!$postsTagsInsertResult) {
             self::$db->rollback();
             return FALSE;
@@ -121,12 +121,27 @@ class PostsModel extends BaseModel{
         self::$db->commit();
         self::$db->autocommit(TRUE);
         return TRUE;
+
     }
 
-     public function updateCounter($id) {
+    public function updateCounter($id) {
         $queryData = array();
         $queryData['set'] = "visits = visits + 1";
         $queryData['where'] = "id = " . mysql_real_escape_string($id);
         return $this->update($queryData);
     }
+
+    private function findExistingTag($tagText)
+    {
+        $tagQueryData = array(
+            'table' => 'tags',
+            'where' =>  "text LIKE '$tagText'");
+        $tag =  $this->find($tagQueryData);
+        if($tag){
+            $tag = $tag[0];
+        }
+
+        return $tag;
+    }
+
 }
