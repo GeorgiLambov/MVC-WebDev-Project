@@ -11,7 +11,7 @@ class LoginController extends BaseController {
                 if (isset($isLoggedIn) && $isLoggedIn == TRUE) {
                     $this->addInfoMessage('Successful login!');
                     $this->addInfoMessage('Hello, '. $userData['username']);
-                    $this->redirectToUrl('/posts/index');
+                    $this->redirectToUrl('/Home');
                 } else {
                     $this->addErrorMessage('Login Error! Invalid Username or Password!');
                 }

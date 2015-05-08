@@ -12,8 +12,8 @@ class PostsController extends BaseController {
         $this->posts = array();
     }
 
-    public function index($days = NULL) {
-        $tagName = NULL;
+    public function index($days = NULL,  $tagName = NULL) {
+
         if (isset($_POST['searched']) && $_POST['searched'] == 1) {
             if (isset($_POST['tagName'])) {
                 $tagName = $_POST['tagName'];
@@ -32,6 +32,10 @@ class PostsController extends BaseController {
         }
 
         $this->renderView();
+    }
+
+    public function tags($tagName = NULL){
+        $this->index(NUll, $tagName);
     }
 
     public function create() {
@@ -53,7 +57,7 @@ class PostsController extends BaseController {
 
                 if ($isAdded) {
                     $this->addInfoMessage('Post created successfully!');
-                    $this->redirectToUrl('/posts/index');
+                    $this->redirectToUrl('/posts');
                 }else {
                     $this->addErrorMessage("Error creating post!");
                 }
@@ -98,7 +102,6 @@ class PostsController extends BaseController {
         if (!$this->auth->isLogged()) {
             $this->redirectToUrl('/login/index');
         }
-
     }
 
     public function byDays($days) {
@@ -189,6 +192,4 @@ class PostsController extends BaseController {
         $data['tags'] = $tags;
         return $data;
     }
-
-
 }

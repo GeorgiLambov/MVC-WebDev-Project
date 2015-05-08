@@ -24,7 +24,7 @@
             <?php endif;?>
             <label for="text" class="col-lg-2 control-label">Text:</label>
             <div class="col-lg-10">
-                <textarea class="col-lg-12 col-xs-12" rows="5" name="text" id="text"  placeholder="Post text"   value="<?= isset($_POST['text']) ? htmlspecialchars($_POST['text']) :  ''  ?>" ></textarea>
+                <textarea style="resize:none" class="col-lg-12 col-xs-12" rows="5" name="text" id="text"  placeholder="Post text"   value="<?= isset($_POST['text']) ? htmlspecialchars($_POST['text']) :  ''  ?>" ></textarea>
             </div>
         </div>
         <div class="form-group col-md-12">

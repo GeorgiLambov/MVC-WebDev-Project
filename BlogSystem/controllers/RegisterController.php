@@ -26,7 +26,7 @@ class RegisterController extends BaseController{
 
                 if ($result) {
                     $this->addInfoMessage('Successful Registration!. Please Login!');
-                    $this->redirectToUrl('/login/index');
+                    $this->redirectToUrl('/login');
                 } else {
                     $this->addErrorMessage('Error in Registration! Username ['. $userData['username'] . '] is not available!');
                 }

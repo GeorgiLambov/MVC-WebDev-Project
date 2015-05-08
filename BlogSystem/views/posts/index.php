@@ -1,10 +1,13 @@
+<br>
 <?php if(!empty($this->posts)): ?>
-    <ul class="list-group  col-lg-6 col-sm-6 col-xs-6">
+    <ul class="list-group  col-lg-8 col-sm-8 col-xs-8">
         <?php foreach ($this->posts as $post) :?>
             <li class="list-group-item">
-                <span class="badge">#<?= $post['id']?></span>
+                 <span class="badge">
+                    <?= htmlspecialchars($this->makeDateInFormat( $post['date']))?>
+                 </span>
                 <a href="/posts/view/<?= $post['id'] ?>">
-                    <span class="post-title"><?= htmlspecialchars($post['title'])?></span>
+                    <h4 class="post-title"><?= htmlspecialchars($post['title'])?></h4>
                 </a>
                 <p class="right">
                     <?php foreach ($post['tags'] as $tag):  ?>

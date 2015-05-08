@@ -35,6 +35,8 @@
         <option value="PostsModel-&gt;findTagsId" />
         <option value="PostsModel-&gt;findExistingTag" />
         <option value="BaseModel-&gt;insert" />
+        <option value="TagsController-&gt;index" />
+        <option value="PostsController-&gt;tags" />
       </list>
     </option>
   </component>

@@ -1,4 +1,4 @@
-<form class="form-horizontal col-lg-offset-1 col-lg-6 col-sm-6 col-xs-6" role="form" method="POST" name="login">
+<form class="form-horizontal col-lg-offset-1 col-lg-6 col-sm-8 col-xs-8" role="form" method="POST" name="login">
     <fieldset>
         <legend>Login</legend>
         <div class="form-group col-md-12">
@@ -30,8 +30,8 @@
             </div>
         </div>
         <div class="col-md-10 col-md-offset-2">
-            <button type="reset" class="btn btn-default">Cancel</button>
             <input type="hidden" name="submitted" class="btn btn-default" value="1">
+            <button type="reset" class="btn btn-default">Cancel</button>
             <button type="submit" class="btn btn-primary">Submit</button>
         </div>
     </fieldset>
