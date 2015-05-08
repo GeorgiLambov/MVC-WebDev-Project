@@ -37,6 +37,13 @@
         <option value="BaseModel-&gt;insert" />
         <option value="TagsController-&gt;index" />
         <option value="PostsController-&gt;tags" />
+        <option value="BaseModel-&gt;__construct" />
+        <option value="LoginModel-&gt;__construct" />
+        <option value="BaseController-&gt;__construct" />
+        <option value="PostsModel-&gt;__construct" />
+        <option value="PostsController-&gt;onInit" />
+        <option value="TagsModel-&gt;__construct" />
+        <option value="CommentsModel-&gt;__construct" />
       </list>
     </option>
   </component>

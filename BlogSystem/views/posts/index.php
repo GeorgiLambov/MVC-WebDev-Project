@@ -1,4 +1,3 @@
-<br>
 <?php if(!empty($this->posts)): ?>
     <ul class="list-group  col-lg-8 col-sm-8 col-xs-8">
         <?php foreach ($this->posts as $post) :?>
@@ -17,5 +16,9 @@
             </li>
             <br/>
         <?php endforeach; ?>
+        <?php
+        // render the pagination links
+        $this->pagination->render();
+        ?>
     </ul>
 <?php endif; ?>

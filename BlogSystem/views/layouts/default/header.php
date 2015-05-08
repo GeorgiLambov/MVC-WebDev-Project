@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/content/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="/content/bootstrap-theme.css">
     <link rel="stylesheet" href="/content/paging/public/css/zebra_pagination.css" type="text/css">
+    <script type="text/javascript" src="/content/paging/public/javascript/zebra_pagination.js"></script>
     <script type="text/javascript" src="/content/jquery-2.1.3.js"></script>
 </head>
 <body>

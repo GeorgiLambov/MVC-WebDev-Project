@@ -10,7 +10,7 @@ class PostsModel extends BaseModel{
         return $this->getById(mysql_real_escape_string($id));
     }
 
-    public function getAllPosts($tagName = NULL, $date = NULL) {
+    public function getAllPosts($date = NULL, $tagName = NULL) {
         if ($tagName != NULL) {
             $tagName = '%' . mysql_real_escape_string($tagName) . '%';
             $statement = self::$db->prepare(

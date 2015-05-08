@@ -4,15 +4,19 @@ class PostsController extends BaseController {
     private $postsModel;
     private $tagsModel;
     private $commentsModel;
+    private  $records_per_page;
 
     public function onInit() {
         $this->postsModel = new PostsModel();
         $this->tagsModel = new TagsModel();
         $this->commentsModel = new CommentsModel();
         $this->posts = array();
+
+        $this->pagination = new Zebra_Pagination();
+        $this->records_per_page = 3;
     }
 
-    public function index($days = NULL,  $tagName = NULL) {
+    public function index($days = NULL, $tagName = NULL) {
 
         if (isset($_POST['searched']) && $_POST['searched'] == 1) {
             if (isset($_POST['tagName'])) {
@@ -20,7 +24,7 @@ class PostsController extends BaseController {
             }
         }
 
-        $this->postsQwery = $this->postsModel->getAllPosts($tagName, $days);
+        $this->postsQwery = $this->postsModel->getAllPosts($days, $tagName);
         foreach ($this->postsQwery as $post) {
             $post['tags'] = $this->tagsModel->getTagsFromPostId($post['id']);
             $this->posts[] = $post;
@@ -30,6 +34,19 @@ class PostsController extends BaseController {
         if (!empty($mostPopularTags)){
             $this->mostPopularTags = $mostPopularTags;
         }
+
+        // the number of total records is the number of records in the array
+       $this->pagination->records(count($this->posts));
+
+        // records per page
+        $this->pagination->records_per_page($this->records_per_page);
+
+        // here's the magick: we need to display *only* the records for the current page
+        $this->posts = array_slice(
+            $this->posts,
+            (($this->pagination->get_page() - 1) * $this->records_per_page),
+            $this->records_per_page
+        );
 
         $this->renderView();
     }
@@ -113,7 +130,7 @@ class PostsController extends BaseController {
         $date = date_create(date(''));
         date_sub($date, date_interval_create_from_date_string("$days days"));
         $dateAsString = date_format($date, 'Y-m-d H:i:s');
-        $this->index($dateAsString);
+        $this->index($dateAsString, null);
     }
 
     private function validatePostFormData() {

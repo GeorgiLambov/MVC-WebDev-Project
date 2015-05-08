@@ -2,6 +2,7 @@
 
 require_once('includes/config.php');
 require_once('content/validator/src/Valitron/Validator.php');
+require_once('content/paging/Zebra_Pagination.php');
 
 use Valitron\Validator as V;
 V::langDir(__DIR__.'/content/validator/lang');
