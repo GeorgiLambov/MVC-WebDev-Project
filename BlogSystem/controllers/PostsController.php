@@ -127,10 +127,41 @@ class PostsController extends BaseController {
         $this->renderView(__FUNCTION__);
     }
 
-    public function delete($id) {
-        if (!$this->auth->isLogged()) {
-            $this->redirectToUrl('/login/index');
+    public function deletePost($id) {
+        if (!$this->auth->isAdmin() && !$this->auth->isLogged()) {
+            $this->redirectToUrl('/login');
         }
+
+         // todo make confirm
+        $deletePostComments = $this->postsModel->deletePostComments($id);
+        $deletePostTags = $this->postsModel->deletePostTags($id);
+
+
+        $isDeletePost = $this->postsModel->deletePost($id);
+
+        if ($isDeletePost) {
+            $this->addInfoMessage('Post delete successfully!');
+        }else {
+            $this->addErrorMessage("Error delete post!");
+        }
+
+        $this->redirectToUrl('/posts');
+    }
+
+    public function deleteComment($id){
+        if (!$this->auth->isAdmin() && !$this->auth->isLogged()) {
+            $this->redirectToUrl('/login');
+        }
+
+        $deletePostComments = $this->postsModel->deleteComment($id);
+
+        if ($deletePostComments) {
+            $this->addInfoMessage('Comment delete successfully!');
+        }else {
+            $this->addErrorMessage("Error delete Comment!");
+        }
+
+        $this->redirectToUrl('/posts');
     }
 
     public function byDays($days) {

@@ -1,19 +1,19 @@
 <div class="panel panel-default col-lg-10 col-sm-10 col-xs-10">
     <div class="well well-lg col-lg-12">
-              <div class="panel-title col-lg-8">
-                <p><?= htmlspecialchars($this->post['title'])?></p>
-            </div>
-            <div class="col-lg-4 text-left">
-               <p>Posted on:  &nbsp; <span><?= htmlspecialchars($this->makeDateInFormat( $this->post['date']))?>&nbsp;</span>
+        <div class="panel-title col-lg-8">
+            <p><?= htmlspecialchars($this->post['title'])?></p>
+        </div>
+        <div class="col-lg-4 text-left">
+            <p>Posted on:  &nbsp; <span><?= htmlspecialchars($this->makeDateInFormat( $this->post['date']))?>&nbsp;</span>
                 <span class="badge">Visits:&nbsp; <?= htmlspecialchars($this->post['visits'])?></span>
-               </p>
-            </div>
-       </div>
+            </p>
+        </div>
+    </div>
     <div class="panel-body">
-       <p> <?= htmlspecialchars($this->post['text']) ?></p>
-            <div class="col-lg-11 text-right">
-                <p>Post#: <?= htmlspecialchars($this->post['id'])?></p>
-            </div>
+        <p> <?= htmlspecialchars($this->post['text']) ?></p>
+        <div class="col-lg-11 text-right">
+            <p>Post#: <?= htmlspecialchars($this->post['id'])?></p>
+        </div>
     </div>
     <?php foreach ($this->comments as $comment): ?>
         <div class="well well-lg col-lg-12">
@@ -24,6 +24,14 @@
             <div class="text-left col-lg-2">
                 <?= htmlspecialchars($this->makeDateInFormat($comment['date'])) ?>
             </div>
+            <?php if($this->auth->isAdmin()): ?>
+                <form class="form-horizontal col-lg-offset-10" method="POST"
+                      action="/posts/deleteComment/<?= $comment['id'] ?>">
+                    <div class="form-group">
+                        <button class="btn btn-danger">DELETE</button>
+                    </div>
+                </form>
+            <?php endif; ?>
         </div>
     <?php endforeach;?>
     <form class="form-horizontal col-lg-offset-4 col-lg-6 col-sm-10 col-xs-10"
@@ -71,12 +79,20 @@
             </div>
             <div class="form-group">
                 <div class="col-lg-10 col-lg-offset-2">
-                    <input type="hidden" name="formToken"value="<?= $_SESSION['formToken'] ?>" />
+                    <input type="hidden" name="formToken" value="<?= $_SESSION['formToken'] ?>" />
                     <button type="reset" class="btn btn-default">Cancel</button>
                     <button type="submit" class="btn btn-primary">Post Comment</button>
                 </div>
             </div>
         </fieldset>
     </form>
+    <?php if($this->auth->isAdmin()): ?>
+        <form class="form-horizontal col-lg-offset-10 col-lg-2" method="POST"
+              action="/posts/deletePost/<?= $this->post['id'] ?>">
+            <div class="form-group">
+                <button class="btn btn-danger">DELETE ALL</button>
+            </div>
+        </form>
+    <?php endif; ?>
 </div>
 

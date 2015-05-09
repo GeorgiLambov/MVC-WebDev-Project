@@ -39,8 +39,9 @@
                     <li><a href="/register">Register</a></li>
                     <li><a href="/login">LogIn</a></li>
                 <?php endif; ?>
-                <?php if($this->auth->isLogged()): ?>
-                    <li><a href="/logout">Logout</a></li>
+                <?php if($this->auth->isLogged()) :?>
+                   <li> <a> Hi, <?= htmlspecialchars($_SESSION['username']) ?></a></li>
+                   <li><a href="/logout">Logout</a></li>
                 <?php endif; ?>
             </ul>
         </div>
@@ -66,4 +67,5 @@
             <a href="/posts/byDays/7" class="btn btn-default">Last week</a>
             <a href="/posts/byDays/30" class="btn btn-default">Last month</a>
             <a href="/posts/byDays/365" class="btn btn-default">Last year</a>
+            <br>
         </div>

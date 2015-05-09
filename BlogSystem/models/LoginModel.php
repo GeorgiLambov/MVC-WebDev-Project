@@ -3,6 +3,7 @@
 class LoginModel extends BaseModel {
 
     private static $isLogged = FALSE;
+    private static $isAdmin = FALSE;
     private static $loggedUser = ARRAY();
 
     public function __construct($args = array()) {
@@ -16,11 +17,19 @@ class LoginModel extends BaseModel {
                 'id' => $_SESSION['user_id'],
                 'username' => $_SESSION['username']
             );
+
+            if( $_SESSION['admin'] ){
+                self::$isAdmin = true;
+            }
         }
     }
     
     public function isLogged() {
         return self::$isLogged;
+    }
+
+    public function isAdmin() {
+        return self::$isAdmin;
     }
     
     public function getLoggedUser() {
@@ -32,7 +41,7 @@ class LoginModel extends BaseModel {
         $password=  mysql_real_escape_string($password);
 
         $statement = self::$db->prepare(
-                "SELECT id, username, pass_hash
+                "SELECT id, username, pass_hash, is_admin
                  FROM users
                  WHERE username = ?");
 
@@ -42,27 +51,8 @@ class LoginModel extends BaseModel {
         if (!empty($resultSet) && password_verify($password, $resultSet[0]['pass_hash'])) {
             $_SESSION['username'] =  $resultSet[0]['username'];
             $_SESSION['user_id'] =  $resultSet[0]['id'];
-            return TRUE;
-        }
-        
-        return FALSE;
-    }
+            $_SESSION['admin'] =  $resultSet[0]['is_admin'];
 
-    public function userInfo($username, $password) {
-        $username=  mysql_real_escape_string($username);
-        $password=  mysql_real_escape_string($password);
-
-        $statement = self::$db->prepare(
-            "SELECT *
-                 FROM users
-                 WHERE username = ?");
-
-        $statement->bind_param('s', $username);
-        $resultSet = $this->executeStatementWithResultArray($statement);
-
-        if (!empty($resultSet) && password_verify($password, $resultSet[0]['pass_hash'])) {
-            $_SESSION['username'] =  $resultSet[0]['username'];
-            $_SESSION['user_id'] =  $resultSet[0]['id'];
             return TRUE;
         }
 

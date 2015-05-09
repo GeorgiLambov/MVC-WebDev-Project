@@ -131,6 +131,37 @@ class PostsModel extends BaseModel{
         return $this->update($queryData);
     }
 
+    public function deletePost($id) {
+        $queryData = array();
+        $queryData['where'] = "id = " . mysql_real_escape_string($id);
+
+        return $this->delete($queryData);
+    }
+
+    public function deletePostComments($postId){
+        $queryData = array();
+        $queryData['table'] = 'comments';
+        $queryData['where'] = "post_id = " . mysql_real_escape_string($postId);
+
+        return $this->delete($queryData);
+    }
+
+    public function deletePostTags($postId){
+        $queryData = array();
+        $queryData['table'] = 'posts_tags';
+        $queryData['where'] = "post_id = " . mysql_real_escape_string($postId);
+
+        return $this->delete($queryData);
+    }
+
+    public function deleteComment($Id){
+        $queryData = array();
+        $queryData['table'] = 'comments';
+        $queryData['where'] = "id = " . mysql_real_escape_string($Id);
+
+        return $this->delete($queryData);
+    }
+
     private function findExistingTag($tagText)
     {
         $tagQueryData = array(

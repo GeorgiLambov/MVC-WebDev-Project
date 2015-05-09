@@ -112,6 +112,25 @@ abstract class BaseModel {
         return $results;
     }
 
+    public function delete($args = array()) {
+        $defaults = array(
+            'table' => $this->table,
+            'delete' => '',
+            'where' => ''
+        );
+
+        $args = array_merge($defaults, $args);
+        extract($args);
+        $query = "DELETE FROM {$table} WHERE {$where}";
+        $resultSet = self::$db->query($query);
+        if (gettype($resultSet) == 'boolean') {
+            return $resultSet;
+        }
+
+        $results = $this->processResultSet($resultSet);
+        return $results;
+    }
+
     protected function processResultSet($resultSet) {
         $result = array();
         if (!empty($resultSet) && $resultSet->num_rows > 0) {

@@ -46,6 +46,16 @@
         <option value="CommentsModel-&gt;__construct" />
         <option value="Zebra_Pagination-&gt;records" />
         <option value="LogoutController-&gt;index" />
+        <option value="PostsController-&gt;delete" />
+        <option value="PostsModel-&gt;deletePost" />
+        <option value="BaseModel-&gt;delete" />
+        <option value="PostsModel-&gt;deletePostComments" />
+        <option value="PostsController-&gt;deletePost" />
+        <option value="PostsModel-&gt;deletePostTags" />
+        <option value="PostsController-&gt;deleteComment" />
+        <option value="PostsModel-&gt;deleteComment" />
+        <option value="UserProfileController-&gt;show" />
+        <option value="UserModel-&gt;getUserInfo" />
       </list>
     </option>
   </component>
