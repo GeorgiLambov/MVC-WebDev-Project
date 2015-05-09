@@ -7,11 +7,11 @@ class RegisterModel extends BaseModel {
     }
 
     public function registerUser($userData) {
-        $firstName = $userData['firstName'];
-        $lastName = $userData['lastName'];
-        $username = $userData['username'];
-        $email = $userData['email'];
-        $password = $userData['password'];
+        $firstName = mysql_real_escape_string($userData['firstName']);
+        $lastName = mysql_real_escape_string($userData['lastName']);
+        $username = mysql_real_escape_string($userData['username']);
+        $email = mysql_real_escape_string($userData['email']);
+        $password = mysql_real_escape_string($userData['password']);
 
         $isUsernameUnique = self::$db->prepare(
                "SELECT COUNT(u.id) AS count

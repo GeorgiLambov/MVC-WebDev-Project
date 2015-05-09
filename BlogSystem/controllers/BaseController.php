@@ -11,6 +11,9 @@ abstract class BaseController {
         $this->controllerName = $controllerName;
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $this->isPost = true;
+        } else {
+            // create unique id every time when render html
+            $_SESSION['formToken'] = uniqid(mt_rand(), true);
         }
         $this->fieldsErrors = array();
         $this->validator = new \Valitron\Validator($_POST);

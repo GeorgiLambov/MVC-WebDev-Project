@@ -19,7 +19,12 @@ class RegisterController extends BaseController{
     }
 
     function index() {
-        if ($this->isPost && $_POST['submitted'] == 1) {
+        if ($this->isPost) {
+            If(!isset($_POST['formToken']) || $_POST['formToken'] != $_SESSION['formToken']) {
+                $this->addErrorMessage('Invalid request!');
+                $this->redirectToUrl('/Home');
+            }
+
             $userData = $this->validateFormData();
             if ($userData != NULL ) {
                 $result = $this->registerModel->registerUser($userData);

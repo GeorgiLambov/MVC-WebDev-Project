@@ -7,8 +7,8 @@ class LoginModel extends BaseModel {
 
     public function __construct($args = array()) {
         parent::__construct(array('table' => 'users'));
-        session_set_cookie_params(1800, '/');
-        session_start();
+        session_set_cookie_params(3000, '/');
+        //session_start();
         
         if (!empty($_SESSION['username'])) {
             self::$isLogged = TRUE;
@@ -28,6 +28,9 @@ class LoginModel extends BaseModel {
     }
     
     public function logIn($username, $password) {
+        $username=  mysql_real_escape_string($username);
+        $password=  mysql_real_escape_string($password);
+
         $statement = self::$db->prepare(
                 "SELECT id, username, pass_hash
                  FROM users
@@ -46,6 +49,9 @@ class LoginModel extends BaseModel {
     }
 
     public function userInfo($username, $password) {
+        $username=  mysql_real_escape_string($username);
+        $password=  mysql_real_escape_string($password);
+
         $statement = self::$db->prepare(
             "SELECT *
                  FROM users

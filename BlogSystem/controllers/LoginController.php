@@ -4,13 +4,18 @@ class LoginController extends BaseController {
 
     function index() {
         if ($this->isPost) {
+            If(!isset($_POST['formToken']) || $_POST['formToken'] != $_SESSION['formToken']) {
+                $this->addErrorMessage('Invalid request!');
+                $this->redirectToUrl('/Home');
+            }
+
             $userData = $this->validateFormData();
-            if ($userData != NULL && $_POST['submitted'] == 1) {
+            if ($userData != NULL) {
                 $isLoggedIn = $this->auth->logIn($userData['username'], $userData['password']);
 
                 if (isset($isLoggedIn) && $isLoggedIn == TRUE) {
                     $this->addInfoMessage('Successful login!');
-                    $this->addInfoMessage('Hello, '. $userData['username']);
+                    $this->addInfoMessage('Hello, '. htmlspecialchars($userData['username']));
                     $this->redirectToUrl('/Home');
                 } else {
                     $this->addErrorMessage('Login Error! Invalid Username or Password!');
@@ -38,7 +43,10 @@ class LoginController extends BaseController {
             'slug' => [
                 ['userName'],
                 ['password']
-            ]
+            ],
+            'alpha' => [
+                ['username']
+             ]
         ];
 
         return $this->makeValidation($rules);

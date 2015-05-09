@@ -44,6 +44,8 @@
         <option value="PostsController-&gt;onInit" />
         <option value="TagsModel-&gt;__construct" />
         <option value="CommentsModel-&gt;__construct" />
+        <option value="Zebra_Pagination-&gt;records" />
+        <option value="LogoutController-&gt;index" />
       </list>
     </option>
   </component>

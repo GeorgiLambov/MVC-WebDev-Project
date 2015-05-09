@@ -4,7 +4,7 @@ class PostsController extends BaseController {
     private $postsModel;
     private $tagsModel;
     private $commentsModel;
-    private  $records_per_page;
+    private $records_per_page;
 
     public function onInit() {
         $this->postsModel = new PostsModel();
@@ -13,12 +13,16 @@ class PostsController extends BaseController {
         $this->posts = array();
 
         $this->pagination = new Zebra_Pagination();
-        $this->records_per_page = 3;
+        $this->records_per_page = 4;
     }
 
     public function index($days = NULL, $tagName = NULL) {
+         if($this->isPost){
+            If(!isset($_POST['formToken']) || $_POST['formToken'] != $_SESSION['formToken']) {
+                $this->addErrorMessage('Invalid request!');
+                $this->redirectToUrl('/Home');
+            }
 
-        if (isset($_POST['searched']) && $_POST['searched'] == 1) {
             if (isset($_POST['tagName'])) {
                 $tagName = $_POST['tagName'];
             }
@@ -36,12 +40,12 @@ class PostsController extends BaseController {
         }
 
         // the number of total records is the number of records in the array
-       $this->pagination->records(count($this->posts));
+        $this->pagination->records(count($this->posts));
 
         // records per page
         $this->pagination->records_per_page($this->records_per_page);
 
-        // here's the magick: we need to display *only* the records for the current page
+        // here's the magic: we need to display *only* the records for the current page
         $this->posts = array_slice(
             $this->posts,
             (($this->pagination->get_page() - 1) * $this->records_per_page),
@@ -60,7 +64,12 @@ class PostsController extends BaseController {
             $this->redirectToUrl('/login/index');
         }
 
-        if ($this->isPost && $_POST['submitted'] == 1) {
+        if ($this->isPost) {
+            If(!isset($_POST['formToken']) || $_POST['formToken'] != $_SESSION['formToken']) {
+                $this->addErrorMessage('Invalid request!');
+                $this->redirectToUrl('/Home');
+            }
+
             $isAdded = FALSE;
             $validData = $this->validatePostFormData();
 
@@ -91,10 +100,13 @@ class PostsController extends BaseController {
         }
 
         $this->postsModel->updateCounter($id);
+        if ($this->isPost) {
+            If(!isset($_POST['formToken']) || $_POST['formToken'] != $_SESSION['formToken']) {
+                $this->addErrorMessage('Invalid request!');
+                $this->redirectToUrl('/Home');
+            }
 
-        if ($this->isPost && $_POST['submitted'] == 1) {
             $commentData = $this->validateCommentFormData();
-
             if ($commentData != NULL) {
                 $commentData['post_id'] = $id;
                 $date = date_create(date(''));
@@ -159,6 +171,7 @@ class PostsController extends BaseController {
                 ['tag5', 30]
             ],
             'slug' => [
+                ['title'],
                 ['tag1'],
                 ['tag2'],
                 ['tag3'],
@@ -202,7 +215,7 @@ class PostsController extends BaseController {
         $tags = array();
         foreach ($validData as $key => $value) {
             if (strpos($key,'tag') !== FALSE && !empty($value)) {
-                $tags[] = mysql_real_escape_string(trim($value));
+                $tags[] = trim($value);
             }
         }
 

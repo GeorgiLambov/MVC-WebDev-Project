@@ -8,6 +8,8 @@ use Valitron\Validator as V;
 V::langDir(__DIR__.'/content/validator/lang');
 V::lang('en');
 
+session_start();
+
 $requestParts = explode('/', parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
 
 $controllerName = DEFAULT_CONTROLLER;
@@ -28,14 +30,14 @@ $controllerFileName = "controllers/" . $controllerClassName . '.php';
 if (class_exists($controllerClassName)) {
     $controller = new $controllerClassName($controllerName, $action);
 } else {
-    //header("Location: " . '/');
+    header("Location: " . '/');
     die("Cannot find controller '$controllerName' in class '$controllerFileName'");
 }
 
 if (method_exists($controller, $action)) {
     call_user_func_array(array($controller, $action), $params);
 } else {
-    //header("Location: " . '/');
+    header("Location: " . '/');
     die("Cannot find action '$action' in controller '$controllerClassName'");
 }
 

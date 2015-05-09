@@ -88,7 +88,7 @@
             <?php endif;?>
         </div>
         <div class="col-lg-10 col-lg-offset-2">
-            <input type="hidden" value="1" name="submitted"/>
+            <input type="hidden" name="formToken"value="<?= $_SESSION['formToken'] ?>" />
             <button type="reset" class="btn btn-default">Cancel</button>
             <button type="submit" class="btn btn-primary add-post">Add post</button>
         </div>

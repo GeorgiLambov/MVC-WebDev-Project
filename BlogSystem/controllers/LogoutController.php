@@ -5,7 +5,7 @@ class LogoutController extends BaseController {
     public function index() {
         session_destroy();
         $this->addInfoMessage('Successful Logout!');
-        $this->redirectToUrl('/home');
+        $this->redirectToUrl('/Home');
         exit();
     }
 }

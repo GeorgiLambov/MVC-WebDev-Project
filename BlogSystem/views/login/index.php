@@ -30,7 +30,7 @@
             </div>
         </div>
         <div class="col-md-10 col-md-offset-2">
-            <input type="hidden" name="submitted" class="btn btn-default" value="1">
+            <input type="hidden" name="formToken"value="<?= $_SESSION['formToken'] ?>" />
             <button type="reset" class="btn btn-default">Cancel</button>
             <button type="submit" class="btn btn-primary">Submit</button>
         </div>

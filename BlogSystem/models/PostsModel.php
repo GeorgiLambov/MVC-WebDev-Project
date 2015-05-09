@@ -143,5 +143,4 @@ class PostsModel extends BaseModel{
 
         return $tag;
     }
-
 }

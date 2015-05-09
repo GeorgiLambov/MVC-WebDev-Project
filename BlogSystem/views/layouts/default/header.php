@@ -30,7 +30,7 @@
                     <div class="form-group">
                         <input type="text" class="form-control" placeholder="Search" name="tagName">
                     </div>
-                    <input type="hidden" name="searched" value="1"/>
+                    <input type="hidden" name="formToken"value="<?= $_SESSION['formToken'] ?>" />
                     <button type="submit" class="btn btn-default">Search</button>
                 </form>
             </ul>
