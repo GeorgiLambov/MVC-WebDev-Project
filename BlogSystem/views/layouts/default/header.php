@@ -61,7 +61,7 @@
             <?php unset($_SESSION['messages']) ?>
         <?php endif; ?>
         <div class="btn-group-vertical col-md-2 col-sm-12 col-xs-12">
-            <a href="/posts" class="btn btn-default" style="">All Posts</a>
+            <a href="/posts" class="btn btn-default">All Posts</a>
             <a href="/posts/byDays/1" class="btn btn-default">Last day</a>
             <a href="/posts/byDays/7" class="btn btn-default">Last week</a>
             <a href="/posts/byDays/30" class="btn btn-default">Last month</a>

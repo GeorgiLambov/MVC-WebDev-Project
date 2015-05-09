@@ -61,7 +61,7 @@ class PostsController extends BaseController {
 
     public function create() {
         if (!$this->auth->isLogged()) {
-            $this->redirectToUrl('/login/index');
+            $this->redirectToUrl('/login');
         }
 
         if ($this->isPost) {
@@ -171,7 +171,6 @@ class PostsController extends BaseController {
                 ['tag5', 30]
             ],
             'slug' => [
-                ['title'],
                 ['tag1'],
                 ['tag2'],
                 ['tag3'],

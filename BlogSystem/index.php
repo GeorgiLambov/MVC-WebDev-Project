@@ -27,7 +27,7 @@ $params = array_splice($requestParts, 3);
 $controllerClassName = ucfirst(strtolower($controllerName)) . 'Controller';
 $controllerFileName = "controllers/" . $controllerClassName . '.php';
 
-if (class_exists($controllerClassName)) {
+if (class_exists($controllerClassName) && $controllerClassName != 'BaseController') {
     $controller = new $controllerClassName($controllerName, $action);
 } else {
     header("Location: " . '/');
