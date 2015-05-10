@@ -95,7 +95,7 @@ class PostsController extends BaseController {
 
     public function view($id = array()) {
         if (!is_numeric($id)) {
-            $this->addErrorMessage('Invalid URL');
+            $this->addErrorMessage('Page not found!');
             $this->redirectToUrl('/');
         }
 
@@ -165,8 +165,8 @@ class PostsController extends BaseController {
     }
 
     public function byDays($days) {
-        if (!is_numeric($days)) {
-            $this->addErrorMessage('Invalid URL');
+        if (!is_numeric($days) || $days > 365) {
+            $this->addErrorMessage('Page not found!');
             $this->redirectToUrl('/');
         }
 

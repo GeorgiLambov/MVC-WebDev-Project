@@ -15,7 +15,16 @@
         </ul>
     </div>
 <?php endif; ?>
+<footer class="col-lg-offset-4 col-lg-12 col-sm-12 col-xs-12">
+    <hr/>
+    <p>
+    <a href="https://github.com/GeorgiLambov/MVC-WebDev-Project" target="_blank">Open source project.</a>
+    Author: Georgi Lambov
+    Powered by:</strong> <a href="#">PHP</a>
+    </p>
+</footer>
 </div>
+
 <script type="text/javascript" src="/content/bootstrap/js/bootstrap.js"></script>
 <script type="text/javascript" src="/content/paging/public/javascript/zebra_pagination.js"></script>
 </body>
