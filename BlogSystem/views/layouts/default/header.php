@@ -40,7 +40,7 @@
                     <li><a href="/login">LogIn</a></li>
                 <?php endif; ?>
                 <?php if($this->auth->isLogged()) :?>
-                   <li> <a> Hi, <?= htmlspecialchars($_SESSION['username']) ?></a></li>
+                   <li><a href="#"> Hi, <?= htmlspecialchars($_SESSION['username']) ?></a></li>
                    <li><a href="/logout">Logout</a></li>
                 <?php endif; ?>
             </ul>
