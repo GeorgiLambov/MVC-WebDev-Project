@@ -102,7 +102,7 @@ CREATE TABLE `blog_system`.`posts_tags` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users`*/;
-INSERT INTO `users` VALUES (1,'fname', 'lname','admin', '$2y$10$Ig9basKY2gJMGrp.E0xpGej/6nqwOFr1psOcpjXKLGCq7eNFXOdsW', NULL, 1);
+INSERT INTO `users` VALUES (1,'fname', 'lname','adming', '$2y$10$Ig9basKY2gJMGrp.E0xpGej/6nqwOFr1psOcpjXKLGCq7eNFXOdsW', NULL, 1);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 

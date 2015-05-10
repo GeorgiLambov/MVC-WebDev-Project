@@ -18,9 +18,8 @@
 <footer class="col-lg-offset-4 col-lg-12 col-sm-12 col-xs-12">
     <hr/>
     <p>
-    <a href="https://github.com/GeorgiLambov/MVC-WebDev-Project" target="_blank">Open source project.</a>
-    Author: Georgi Lambov
-    Powered by:</strong> <a href="#">PHP</a>
+    <a href="https://github.com/GeorgiLambov/MVC-WebDev-Project" target="_blank">Open source project</a>
+    <em>Author: Georgi Lambov Powered by<a href="#">PHP</a></em>
     </p>
 </footer>
 </div>

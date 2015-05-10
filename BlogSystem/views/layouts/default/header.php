@@ -13,7 +13,7 @@
 <body>
 <div class="container" >
     <div class="page-header col-lg-12 col-sm-12 col-xs-12">
-        <h3>Welcome to this Custom MVC Blog application</h3>
+        <h3>Free web Posts publishing tool from GLambov, for sharing text</h3>
     </div>
     <nav class="navbar navbar-default col-lg-12 col-sm-12 col-xs-12">
         <div class="container-fluid">
