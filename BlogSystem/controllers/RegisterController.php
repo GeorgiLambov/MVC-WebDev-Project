@@ -46,10 +46,11 @@ class RegisterController extends BaseController{
             'required' => [
                 ['username'],
                 ['password'],
+                ['lastName'],
                 ['confirmPassword']
             ],
             'lengthMin' => [
-                ['username', 2],
+                ['username', 3],
                 ['password', 3]
             ],
             'lengthMax' => [
