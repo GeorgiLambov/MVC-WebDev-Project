@@ -7,11 +7,12 @@ class RegisterModel extends BaseModel {
     }
 
     public function registerUser($userData) {
-        $firstName = mysql_real_escape_string($userData['firstName']);
-        $lastName = mysql_real_escape_string($userData['lastName']);
-        $username = mysql_real_escape_string($userData['username']);
-        $email = mysql_real_escape_string($userData['email']);
-        $password = mysql_real_escape_string($userData['password']);
+        // in production mysql_real_escape_string is a function of the mysql extension
+        $firstName = $this->mysql_escape_mimic($userData['firstName']);
+        $lastName = $this->mysql_escape_mimic($userData['lastName']);
+        $username = $this->mysql_escape_mimic($userData['username']);
+        $email = $this->mysql_escape_mimic($userData['email']);
+        $password = $this->mysql_escape_mimic($userData['password']);
 
         $isUsernameUnique = self::$db->prepare(
                "SELECT COUNT(u.id) AS count
@@ -19,7 +20,7 @@ class RegisterModel extends BaseModel {
                 WHERE u.username = ?");
         $isUsernameUnique->bind_param("s", $username);
         $count = $this->executeStatementWithResultArray($isUsernameUnique)[0]['count'];
-        if ($count > 0) {
+        if ($count) {
             return FALSE;
         }
 

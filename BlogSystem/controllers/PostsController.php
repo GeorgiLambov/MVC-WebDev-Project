@@ -34,7 +34,7 @@ class PostsController extends BaseController {
             $this->posts[] = $post;
         }
 
-        $mostPopularTags = $this->tagsModel->getMostPopularTags();
+        $this->mostPopularTags = $this->tagsModel->getMostPopularTags();
         if (!empty($mostPopularTags)){
             $this->mostPopularTags = $mostPopularTags;
         }

@@ -35,8 +35,8 @@ abstract class BaseController {
 
     public function renderView($viewName = "Index", $includeLayout = true) {
         if (!$this->isViewRendered) {
-            $viewFileName = 'views/' . $this->controllerName
-                . '/' . $viewName . '.php';
+            $viewFileName = 'views/' . strtolower ($this->controllerName
+                . '/' . $viewName . '.php');
             if ($includeLayout) {
                 $headerFile = 'views/layouts/' . $this->layoutName . '/header.php';
                 include_once($headerFile);

@@ -10,7 +10,7 @@ class CommentsModel extends BaseModel
     public function getAllCommentsFromPost($id)
     {
         $queryData = array();
-        $queryData['where'] = "post_id = " . mysql_real_escape_string($id);
+        $queryData['where'] = "post_id = " . $this->mysql_escape_mimic($id);
         return $this->find($queryData);
     }
 
@@ -19,11 +19,11 @@ class CommentsModel extends BaseModel
         $queryData = array();
         $queryData['columns'] = 'author, email, text, post_id, date';
         $queryData['values'] =
-            "'" . mysql_real_escape_string($commentData['author']) . "', '"
-            . mysql_real_escape_string($commentData['email'] == '' ? NULL : $commentData['email']) . "', '"
-            . mysql_real_escape_string($commentData['text']) . "', '"
-            . mysql_real_escape_string($commentData['post_id']) . "', '"
-            . mysql_real_escape_string($commentData['date']) . "'";
+            "'" . $this->mysql_escape_mimic($commentData['author']) . "', '"
+            . $this->mysql_escape_mimic($commentData['email'] == '' ? NULL : $commentData['email']) . "', '"
+            . $this->mysql_escape_mimic($commentData['text']) . "', '"
+            . $this->mysql_escape_mimic($commentData['post_id']) . "', '"
+            . $this->mysql_escape_mimic($commentData['date']) . "'";
 
         return $this->insert($queryData);
     }

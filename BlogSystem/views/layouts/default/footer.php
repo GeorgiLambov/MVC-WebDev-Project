@@ -1,4 +1,4 @@
-<?php if(isset($this->mostPopularTags)): ?>
+<?php if(!empty($this->mostPopularTags)): ?>
     <div class="col-xs-4 col-lg-2 col-md-2">
         <ul class="nav nav-pills">
             <p>Most popular tags</p>

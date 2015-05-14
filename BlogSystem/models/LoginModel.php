@@ -37,8 +37,8 @@ class LoginModel extends BaseModel {
     }
     
     public function logIn($username, $password) {
-        $username=  mysql_real_escape_string($username);
-        $password=  mysql_real_escape_string($password);
+        $username = $this->mysql_escape_mimic($username);
+        $password = $this->mysql_escape_mimic($password);
 
         $statement = self::$db->prepare(
                 "SELECT id, username, pass_hash, is_admin

@@ -7,12 +7,12 @@ class PostsModel extends BaseModel{
     }
 
     public function getPostById($id) {
-        return $this->getById(mysql_real_escape_string($id));
+        return $this->getById($this->mysql_escape_mimic($id));
     }
 
     public function getAllPosts($date = NULL, $tagName = NULL) {
         if ($tagName != NULL) {
-            $tagName = '%' . mysql_real_escape_string($tagName) . '%';
+            $tagName = '%' . $this->mysql_escape_mimic($tagName) . '%';
             $statement = self::$db->prepare(
                 "SELECT
                     p.id,
@@ -68,11 +68,11 @@ class PostsModel extends BaseModel{
         $queryData = array();
         $queryData['columns'] = 'author_id, text, visits, title, date';
         $queryData['values'] =
-            mysql_real_escape_string($postData['author_id']) . ", '"
-            . mysql_real_escape_string($postData['text']) . "', "
-            . mysql_real_escape_string($postData['visits']) . ", '"
-            . mysql_real_escape_string($postData['title']) . "', '"
-            . mysql_real_escape_string($postData['date']) . "'";
+            $this->mysql_escape_mimic($postData['author_id']) . ", '"
+            . $this->mysql_escape_mimic($postData['text']) . "', "
+            . $this->mysql_escape_mimic($postData['visits']) . ", '"
+            . $this->mysql_escape_mimic($postData['title']) . "', '"
+            . $this->mysql_escape_mimic($postData['date']) . "'";
 
         self::$db->autocommit(FALSE);
         $postInsertResult = $this->insert($queryData);
@@ -81,7 +81,7 @@ class PostsModel extends BaseModel{
 
         // Check existing tag
         foreach ($postData['tags'] as $tag) {
-            $tagText = mysql_real_escape_string($tag);
+            $tagText = $this->mysql_escape_mimic($tag);
             $existingTag = $this->findExistingTag($tagText);
 
             // not exist in DB
@@ -127,13 +127,13 @@ class PostsModel extends BaseModel{
     public function updateCounter($id) {
         $queryData = array();
         $queryData['set'] = "visits = visits + 1";
-        $queryData['where'] = "id = " . mysql_real_escape_string($id);
+        $queryData['where'] = "id = " . $this->mysql_escape_mimic($id);
         return $this->update($queryData);
     }
 
     public function deletePost($id) {
         $queryData = array();
-        $queryData['where'] = "id = " . mysql_real_escape_string($id);
+        $queryData['where'] = "id = " . $this->mysql_escape_mimic($id);
 
         return $this->delete($queryData);
     }
@@ -141,7 +141,7 @@ class PostsModel extends BaseModel{
     public function deletePostComments($postId){
         $queryData = array();
         $queryData['table'] = 'comments';
-        $queryData['where'] = "post_id = " . mysql_real_escape_string($postId);
+        $queryData['where'] = "post_id = " . $this->mysql_escape_mimic($postId);
 
         return $this->delete($queryData);
     }
@@ -149,7 +149,7 @@ class PostsModel extends BaseModel{
     public function deletePostTags($postId){
         $queryData = array();
         $queryData['table'] = 'posts_tags';
-        $queryData['where'] = "post_id = " . mysql_real_escape_string($postId);
+        $queryData['where'] = "post_id = " . $this->mysql_escape_mimic($postId);
 
         return $this->delete($queryData);
     }
@@ -157,7 +157,7 @@ class PostsModel extends BaseModel{
     public function deleteComment($Id){
         $queryData = array();
         $queryData['table'] = 'comments';
-        $queryData['where'] = "id = " . mysql_real_escape_string($Id);
+        $queryData['where'] = "id = " . $this->mysql_escape_mimic($Id);
 
         return $this->delete($queryData);
     }

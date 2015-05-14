@@ -18,17 +18,69 @@ abstract class BaseModel {
         $defaults = array( 'limit' => 0 );
         $args = array_merge($defaults, $args);
         if (!isset($args['table'])) {
-           die('Table not define.');
+            die('Table not define.');
         }
         extract($args);
         $this->table = $table;
         $this->limit = $limit;
     }
 
+    // mimic of the original mysql_real_escape_string but which doesn't need an active mysql connection
+    public static function mysql_escape_mimic($inp) {
+        if(is_array($inp))
+            return array_map(__METHOD__, $inp);
+
+        if(!empty($inp) && is_string($inp)) {
+            return str_replace(array('\\', "\0", "\n", "\r", "'", '"', "\x1a"), array('\\\\', '\\0', '\\n', '\\r', "\\'", '\\"', '\\Z'), $inp);
+        }
+
+        return $inp;
+    }
+
     public function executeStatementWithResultArray($statement) {
-        $statement->execute();
-        $rows = $statement->get_result();
-        return $this->processResultSet($rows);
+        if($statement){
+            $statement->execute();
+
+            // if the MySQL Native Driver (mysqlnd) driver is available
+            // $rows = $statement->get_result();
+            // return $this->processResultSet($rows);
+        }
+
+        return $this->fetch($statement);
+    }
+
+    function fetch($result)
+    {
+        $array = array();
+
+        if($result instanceof mysqli_stmt)
+        {
+            $result->store_result();
+
+            $variables = array();
+            $data = array();
+            $meta = $result->result_metadata();
+
+            while($field = $meta->fetch_field())
+                $variables[] = &$data[$field->name]; // pass by reference
+
+            call_user_func_array(array($result, 'bind_result'), $variables);
+
+            $i=0;
+            while($result->fetch())
+            {
+                $array[$i] = array();
+                foreach($data as $k=>$v)
+                    $array[$i][$k] = $v;
+                $i++;
+            }
+        }
+        elseif($result instanceof mysqli_result)
+        {
+            return $this->processResultSet($result);
+        }
+
+        return $array;
     }
 
     public function executeStatement($statement) {

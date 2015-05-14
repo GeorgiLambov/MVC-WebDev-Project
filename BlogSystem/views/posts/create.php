@@ -87,10 +87,10 @@
                 </div>
             <?php endif;?>
         </div>
-        <div class="col-lg-10 col-lg-offset-2">
+        <div class="col-md-10 col-md-offset-2">
             <input type="hidden" name="formToken"value="<?= $_SESSION['formToken'] ?>" />
             <button type="reset" class="btn btn-default">Cancel</button>
             <button type="submit" class="btn btn-primary add-post">Add post</button>
         </div>
-        <fieldset>
+    </fieldset>
 </form>
