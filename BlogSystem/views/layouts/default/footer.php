@@ -19,7 +19,7 @@
     <hr/>
     <p>
     <a href="https://github.com/GeorgiLambov/MVC-WebDev-Project" target="_blank">Open source project</a>
-    <em>Author: Georgi Lambov</em><a href="#"> Powered by PHP</a>
+    <em>&copy;  2015 - Author: Georgi Lambov</em><a href=""> Powered by PHP</a>
     </p>
 </footer>
 </div>

@@ -25,7 +25,7 @@ abstract class BaseModel {
         $this->limit = $limit;
     }
 
-    // mimic of the original mysql_real_escape_string but which doesn't need an active mysql connection
+    // mimic of the original mysql_real_escape_string which doesn't need an active mysql connection
     public static function mysql_escape_mimic($inp) {
         if(is_array($inp))
             return array_map(__METHOD__, $inp);
