@@ -1,4 +1,4 @@
-<form class="form-horizontal col-lg-offset-1 col-lg-6 col-sm-8 col-xs-8" role="form" method="POST" name="login">
+<form class="form-horizontal col-md-offset-1 col-lg-6 col-sm-8 col-xs-8 col" role="form" method="POST" name="login">
     <fieldset>
         <legend>Login</legend>
         <div class="form-group col-md-12">
@@ -9,7 +9,7 @@
                 </div>
             <?php endif;?>
             <label for="username" class="col-md-2 control-label">Username:</label>
-            <div class="col-md-10">
+            <div class="col-md-8">
                 <input type="text" class="form-control" id="username" name="username"
                        placeholder="Enter username"
                        value="<?= isset($_POST['username']) ? htmlspecialchars($_POST['username']) : ''; ?>">
@@ -23,7 +23,7 @@
                 </div>
             <?php endif;?>
             <label for="password" class="col-md-2 control-label">Password:</label>
-            <div class="col-md-10">
+            <div class="col-md-8">
                 <input type="password" class="form-control" id="password" name="password"
                        placeholder="Enter password"
                        value="<?= isset($_POST['password']) ? htmlspecialchars($_POST['password']) : ''; ?>">

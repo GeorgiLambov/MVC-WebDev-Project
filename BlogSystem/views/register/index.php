@@ -1,4 +1,4 @@
-<form class="form-horizontal col-lg-offset-1 col-lg-6 col-sm-8 col-xs-8" role="form" method="POST" name="register">
+<form class="form-horizontal col-md-offset-1 col-md-6 col-sm-8 col-xs-8 col" role="form" method="POST" name="register">
     <fieldset>
         <legend>Register</legend>
         <div class="form-group col-md-12">
@@ -8,8 +8,8 @@
                     <strong><?php echo $this->fieldsErrors['username']; ?></strong>
                 </div>
             <?php endif;?>
-            <label for="username" class="col-lg-2 control-label">Username:</label>
-            <div class="col-lg-10">
+            <label for="username" class="col-md-2 control-label">Username:</label>
+            <div class="col-md-8">
                 <input type="text" class="form-control" id="username" name="username" placeholder="Enter username"
                        value="<?php echo isset($_POST['username']) ? $_POST['username'] : '' ?>">
             </div>
@@ -21,8 +21,8 @@
                     <strong><?php echo $this->fieldsErrors['firstName']; ?></strong>
                 </div>
             <?php endif;?>
-            <label for="first-name" class="col-lg-2 control-label">First name:</label>
-            <div class="col-lg-10">
+            <label for="first-name" class="col-md-2 control-label">First name:</label>
+            <div class="col-md-8">
                 <input type="text" class="form-control" id="first-name" name="firstName" placeholder="Enter your name"
                        value="<?php echo isset($_POST['firstName']) ? $_POST['firstName'] : '' ?>">
             </div>
@@ -34,8 +34,8 @@
                     <strong><?php echo $this->fieldsErrors['lastName']; ?></strong>
                 </div>
             <?php endif;?>
-            <label for="last-name" class="col-lg-2 control-label">Last name:</label>
-            <div class="col-lg-10">
+            <label for="last-name" class="col-md-2 control-label">Last name:</label>
+            <div class="col-md-8">
                 <input type="text" class="form-control" id="last-name" name="lastName" placeholder="Enter your last name"
                        value="<?php echo isset($_POST['lastName']) ? $_POST['lastName'] : '' ?>">
             </div>
@@ -47,8 +47,8 @@
                     <strong><?php echo $this->fieldsErrors['email']; ?></strong>
                 </div>
             <?php endif;?>
-            <label for="email" class="col-lg-2 control-label">Email:</label>
-            <div class="col-lg-10">
+            <label for="email" class="col-md-2 control-label">Email:</label>
+            <div class="col-md-8">
                 <input type="text" class="form-control" id="email" name="email" placeholder="Enter your email"
                        value="<?php echo isset($_POST['email']) ? $_POST['email'] : '' ?>">
             </div>
@@ -60,8 +60,8 @@
                     <strong><?php echo $this->fieldsErrors['password']; ?></strong>
                 </div>
             <?php endif;?>
-            <label for="password" class="col-lg-2 control-label">Password:</label>
-            <div class="col-lg-10">
+            <label for="password" class="col-md-2 control-label">Password:</label>
+            <div class="col-md-8">
                 <input type="password" class="form-control" id="password" name="password" placeholder="Enter password">
             </div>
         </div>
@@ -72,12 +72,12 @@
                     <strong><?php echo $this->fieldsErrors['confirmPassword']; ?></strong>
                 </div>
             <?php endif;?>
-            <label for="confirm-password" class="col-lg-2 control-label">Confirm password:</label>
-            <div class="col-lg-10">
+            <label for="confirm-password" class="col-md-2 control-label">Confirm password:</label>
+            <div class="col-md-8">
                 <input type="password" class="form-control" id="confirm-password" name="confirmPassword" placeholder="Enter password">
             </div>
         </div>
-        <div class="col-lg-10 col-lg-offset-2">
+        <div class="col-md-10 col-md-offset-2">
             <input type="hidden" name="formToken"value="<?= $_SESSION['formToken'] ?>" />
             <button type="reset" class="btn btn-default">Cancel</button>
             <button type="submit" class="btn btn-primary">Register</button>

@@ -18,32 +18,39 @@
     <nav class="navbar navbar-default col-lg-12 col-sm-12 col-xs-12">
         <div class="container-fluid">
             <div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
                 <a class="navbar-brand" href="/Home">Home</a>
             </div>
-            <ul class="nav navbar-nav navbar-left">
-                <?php if($this->auth->isLogged()): ?>
-                    <li><a href="/posts/create">Create Post</a></li>
-                <?php endif; ?>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <form class="navbar-form col-lg-12 col-sm-8 col-xs-8" role="search" action="/posts" method="post">
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Search" name="tagName">
-                    </div>
-                    <input type="hidden" name="formToken"value="<?= $_SESSION['formToken'] ?>" />
-                    <button type="submit" class="btn btn-default">Search</button>
-                </form>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <?php if(!$this->auth->isLogged()): ?>
-                    <li><a href="/register">Register</a></li>
-                    <li><a href="/login">LogIn</a></li>
-                <?php endif; ?>
-                <?php if($this->auth->isLogged()) :?>
-                   <li><a href="#"> Hi, <?= htmlspecialchars($_SESSION['username']) ?></a></li>
-                   <li><a href="/logout">Logout</a></li>
-                <?php endif; ?>
-            </ul>
+			 <div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<?php if($this->auth->isLogged()): ?>
+						<li><a href="/posts/create">Create Post</a></li>
+					<?php endif; ?>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<form class="navbar-form col-lg-12 col-sm-6 col-xs-8" role="search" action="/posts" method="post">
+						<div class="form-group">
+							<input type="text" class="form-control" placeholder="Search" name="tagName">
+						</div>
+						<input type="hidden" name="formToken"value="<?= $_SESSION['formToken'] ?>" />
+						<button type="submit" class="btn btn-default">Search</button>
+					</form>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<?php if(!$this->auth->isLogged()): ?>
+						<li><a href="/register">Register</a></li>
+						<li><a href="/login">LogIn</a></li>
+					<?php endif; ?>
+					<?php if($this->auth->isLogged()) :?>
+					   <li><a href="#"> Hi, <?= htmlspecialchars($_SESSION['username']) ?></a></li>
+					   <li><a href="/logout">Logout</a></li>
+					<?php endif; ?>
+				</ul>
+			</div>
         </div>
     </nav>
         <?php if(isset($_SESSION['messages'])): ?>
